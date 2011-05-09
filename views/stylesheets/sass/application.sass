@@ -1,0 +1,71 @@
+body
+  background: #333
+
+#conveyor
+  position: absolute
+  right: 0
+  top: 0
+  height: 100%
+  width: 100%
+  overflow: hidden
+  #cutout
+    position: absolute
+    background: url("/images/conveyor_panel.png")
+  #items
+    position: absolute
+    top: 0
+    right: 0
+    width: 100%
+    height: 640px
+    overflow: hidden
+    > div
+      position: absolute
+      background: url("/images/conveyor_bg.png") 0 0
+      width: 800px
+      height: 400px
+      &.punched
+        background-position: 0 -400px
+      &.filled
+        background-position: 0 -800px
+      > div
+        position: absolute
+        left: 50px
+        bottom: 34px
+        width: 161px
+        height: 97px
+        background: url("/images/conveyor_panel.png") 0 -97px no-repeat
+  #puncher
+    position: absolute
+    right: 648px
+    top: -100px
+    width: 165px
+    height: 163px
+    background: url("/images/conveyor_puncher.png") 0 100% no-repeat
+  #placer
+    background: url("/images/conveyor_placer.png") 0 100% no-repeat
+    position: absolute
+    right: 379px
+    top: 0px
+    width: 179px
+    height: 195px
+  #cutout,
+  #panel
+    position: absolute
+    width: 161px
+    height: 97px
+    background: url("/images/conveyor_panel.png") 0 -97px no-repeat
+  #cutout
+    top: 100px
+    right: 644px
+    display: none
+  #panel
+    top: 94px
+    right: 386px
+  #glow
+    position: absolute
+    display: none
+    background: url("/images/conveyor_glow.png")
+    width: 171px
+    height: 157px
+    right: 382px
+    top: 143px
