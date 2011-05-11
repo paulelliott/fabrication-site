@@ -1,5 +1,7 @@
 $(function() {
 
+  try{Typekit.load();}catch(e){}
+
   var $cv = $("#conveyor");
   var $row = $("#items");
   var $items = $row.children();
@@ -7,6 +9,7 @@ $(function() {
   var $panel = $("#panel");
   var $cutout = $("#cutout");
   var $glow = $("#glow");
+  var $fire = $("#catcher div");
 
   walk();
 
@@ -61,7 +64,8 @@ $(function() {
       $puncher.animate({ top: 0 }, 50, function() {
           $row.animate({ paddingTop: 10 }, 50).animate({ paddingTop: 0 }, 50);
           $row.find(":eq(3)").addClass("punched");
-          $cutout.animate({ top: $(window).height() + 200 }, 500);
+          $cutout.animate({ top: $(document).height() }, 1000);
+          $fire.delay(800).fadeIn(50).fadeOut(800);
           $puncher.delay(50).animate({ top: -100 }, 200);
       });
     });

@@ -1,6 +1,33 @@
-body
-  background: #333
+@import 'reset'
+@import 'mixins'
 
+body
+  background: #d7dedd url("/images/bg.png") bottom left repeat-x
+  font-family: "atrament-web-1","atrament-web-2", helvetica, arial, sans-serif
+  height: 100%
+  min-height: 400px
+
+#wrapper
+  position: relative
+  min-width: 880px
+  height: 100%
+
+#content
+  position: relative
+  padding: 240px 0 0 20px
+  z-index: 2
+
+hgroup
+  padding-right: 400px
+  color: #fff
+  text-shadow: 0 1px 1px #9aa09f
+  h1
+    font-size: 60px
+    text-transform: uppercase
+    line-height: 100%
+  h2
+    font-size: 40px
+    line-height: 100%
 #conveyor
   position: absolute
   right: 0
@@ -58,6 +85,7 @@ body
     top: 100px
     right: 644px
     display: none
+    background-position: top left
   #panel
     top: 94px
     right: 386px
@@ -69,3 +97,25 @@ body
     height: 157px
     right: 382px
     top: 143px
+#catcher_back
+  position: absolute
+  height: 108px
+  width: 281px
+  right: 584px
+  bottom: 195px
+  background: url("/images/conveyor_catcher.png") 0 -112px
+#catcher
+  position: absolute
+  height: 250px
+  width: 281px
+  right: 584px
+  bottom: 0
+  background: url("/images/conveyor_catcher.png") bottom left
+  div
+    display: none
+    height: 102px
+    background: url("/images/conveyor_catcher.png")
+    width: 100%
+    position: absolute
+    left: 0
+    top: -47px
