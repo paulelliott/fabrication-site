@@ -1,5 +1,5 @@
 require 'sinatra'
-
+require 'rdiscount'
 require "sinatra/reloader" if development?
 
 get '/stylesheets/*.css' do |f|
@@ -7,6 +7,6 @@ get '/stylesheets/*.css' do |f|
 end
 
 get "/" do
+  @content = RDiscount.new(File.read("views/_content.markdown"), :smart).to_html
   haml :"/index"
 end
-

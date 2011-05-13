@@ -2,32 +2,104 @@
 @import 'mixins'
 
 body
-  background: #d7dedd url("/images/bg.png") bottom left repeat-x
-  font-family: "atrament-web-1","atrament-web-2", helvetica, arial, sans-serif
-  height: 100%
+  background: #cdd6d4 url("/images/bg.png") bottom left repeat-x
+  font-family: "camingodos-web-1", "camingodos-web-2", helvetica, arial, sans-serif
   min-height: 400px
+  color: #4c504e
+  &.wf-active
+    hgroup
+      h1
+        font-size: 60px
+      h2
+        font-size: 40px
 
 #wrapper
   position: relative
   min-width: 880px
-  height: 100%
 
 #content
   position: relative
-  padding: 240px 0 0 20px
+  padding: 240px 0 0 0
   z-index: 2
-
-hgroup
-  padding-right: 400px
+  hgroup
+    padding: 0 400px 0 20px
+    color: #fff
+    text-shadow: 0 1px 1px #9aa09f
+    font-family: "atrament-web-1","atrament-web-2", helvetica, arial, sans-serif
+    margin: 0 0 30px 0
+    h1
+      font-size: 54px
+      text-transform: uppercase
+      line-height: 100%
+    h2
+      font-size: 40px
+      line-height: 100%
+  .opening
+    padding: 0 420px 0 20px
+    ul, p
+      font-size: 14px
+      line-height: 22px
+      margin: 0 0 20px 0
+    ul
+      list-style-type: square
+      padding-left: 60px
+  nav
+    background: #e0e7e4
+    margin: 0 0 20px 0
+    border-bottom: 2px solid #808784
+    ul
+      overflow: hidden
+      padding-left: 20px
+      li
+        cursor: pointer
+        font-size: 22px
+        background: #f5faf6
+        font-family: "atrament-web-1","atrament-web-2", helvetica, arial, sans-serif
+        float: left
+        border-right: 1px solid #cdd6d4
+        padding: 3px 8px
+        color: #828785
+        &:first-of-type
+          border-left: 1px solid #cdd6d4
+        &.selected, &:hover
+          background: #fff
+          color: #4c504e
+  .main
+    clear: both
+    padding: 0 20px 300px 20px
+    p, ul, ol
+      font-size: 13px
+      line-height: 20px
+      margin: 0 0 20px 0
+    ul
+      list-style-type: square
+      padding-left: 40px
+    ol
+      list-style-type: decimal
+      padding-left: 40px
+    h3
+      font-size: 30px
+      color: #fff
+      text-shadow: 0 1px 1px #9aa09f
+      font-weight: 600
+      font-family: "atrament-web-1","atrament-web-2", helvetica, arial, sans-serif
+      margin: 0 0 20px 0
+      padding: 20px 0 0 0
+    pre
+      background: #e4eae9
+      padding: 20px
+      margin: 0 0 20px 0
+      overflow-y: scroll
+footer
   color: #fff
-  text-shadow: 0 1px 1px #9aa09f
-  h1
-    font-size: 60px
-    text-transform: uppercase
-    line-height: 100%
-  h2
-    font-size: 40px
-    line-height: 100%
+  text-align: right
+  text-shadow: 0 1px 1px #717877
+  font-weight: 600
+  font-family: "atrament-web-1","atrament-web-2", helvetica, arial, sans-serif
+  font-size: 22px
+  padding: 0 20px 20px 0
+
+
 #conveyor
   position: absolute
   right: 0
