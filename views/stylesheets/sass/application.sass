@@ -6,12 +6,19 @@ body
   font-family: "camingodos-web-1", "camingodos-web-2", helvetica, arial, sans-serif
   min-height: 400px
   color: #4c504e
-  &.wf-active
+
+html.wf-active
+  #content
     hgroup
+      padding-top: 0
       h1
         font-size: 60px
       h2
         font-size: 40px
+    nav
+      ul
+        li
+          font-size: 22px
 
 #wrapper
   position: relative
@@ -22,17 +29,17 @@ body
   padding: 240px 0 0 0
   z-index: 2
   hgroup
-    padding: 0 400px 0 20px
+    padding: 40px 400px 0 20px
     color: #fff
     text-shadow: 0 1px 1px #9aa09f
-    font-family: "atrament-web-1","atrament-web-2", helvetica, arial, sans-serif
+    font-family: "atrament-web-1", "atrament-web-2", helvetica, arial, sans-serif
     margin: 0 0 30px 0
     h1
-      font-size: 54px
+      font-size: 40px
       text-transform: uppercase
       line-height: 100%
     h2
-      font-size: 40px
+      font-size: 30px
       line-height: 100%
   .opening
     padding: 0 420px 0 20px
@@ -52,9 +59,9 @@ body
       padding-left: 20px
       li
         cursor: pointer
-        font-size: 22px
+        font-size: 13px
         background: #f5faf6
-        font-family: "atrament-web-1","atrament-web-2", helvetica, arial, sans-serif
+        font-family: "atrament-web-1", "atrament-web-2", helvetica, arial, sans-serif
         float: left
         border-right: 1px solid #cdd6d4
         padding: 3px 8px
@@ -82,9 +89,12 @@ body
       color: #fff
       text-shadow: 0 1px 1px #9aa09f
       font-weight: 600
-      font-family: "atrament-web-1","atrament-web-2", helvetica, arial, sans-serif
+      font-family: "atrament-web-1", "atrament-web-2", helvetica, arial, sans-serif
       margin: 0 0 20px 0
       padding: 20px 0 0 0
+    code
+      margin: 0 3px
+      color: #2d2f2e
     pre
       background: #e4eae9
       padding: 20px
