@@ -1,5 +1,9 @@
 $(function() {
-  try{Typekit.load();}catch(e){}
+
+  if (!(/^Win/.test(window.navigator.platform))) {
+    try { Typekit.load(); }
+    catch (e) {}
+  }
 
   (function($main) {
     var $nav = $("<nav />");
