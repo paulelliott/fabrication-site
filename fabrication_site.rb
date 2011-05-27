@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'rdiscount'
-require "sinatra/reloader" if development?
 
 get '/stylesheets/*.css' do |f|
   sass ('/stylesheets/sass/' + f).to_sym
