@@ -1,1 +1,1 @@
-web: bundle exec rackup -s thin
+web: bundle exec rackup -s thin -p $PORT
