@@ -2,9 +2,21 @@
 
 Add this to your gemfile.
 
-`gem 'fabrication'`
+    gem 'fabrication'
 
-Now you can define fabricators in either `spec/fabricators/*.rb` or `test/fabricators/*.rb`. They are automatically loaded, so no additional requires are necessary.
+Now you can define fabricators in either `spec/fabricators/*.rb` or
+`test/fabricators/*.rb`. They are automatically loaded, so no additional
+requires are necessary.
+
+### Configuration
+
+You can specify where the fabricators are loaded from with a configuration option.
+
+    Fabrication::Config.fabricator_dir = "data/fabricators"
+
+Or you can give it an array of locations.
+
+    Fabrication::Config.fabricator_dir = ["data/fabricators", "spec/fabricators"]
 
 ### Rails 3 Generators
 
@@ -74,7 +86,7 @@ In more complex cases where you have already created "widgets" and "wockets" and
 
     And that wocket belongs to that widget
 
-### Usage
+### Fabricators
 
 Define your fabricators.
 
@@ -192,20 +204,5 @@ To run rake successfully:
 1. Clone the project
 2. Install mongodb and sqlite3 (brew install ...)
 3. Install bundler (gem install bundler)
-4. Run `bundle install` from the project root
+4. Run `bundle` from the project root
 5. Run `rake` and the test suite should be all green!
-
-### Contributors
-
-* Les Hill (leshill)
-* Jim Remsik (bigtiger)
-* Dave Ott (daveott)
-* Matt (winescout)
-* Lar Van Der Jagt (supaspoida)
-* Sandro Turriate (sandro)
-* Justin Smestad (jsmestad)
-* Christopher Hanks (chanks) - Chained callbacks
-* monsterlabs - Rails 3 Generators
-* Brandon Weiss (brandonweiss) - Sequal Model support
-* Tim Pope (tpope) - Singularize generated fabricator names
-* hakanensari - Default attribute cucumber steps
