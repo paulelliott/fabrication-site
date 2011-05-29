@@ -10,13 +10,18 @@ requires are necessary.
 
 ### Configuration
 
-You can specify where the fabricators are loaded from with a configuration option.
+You can specify where the fabricators are loaded from with a configuration
+option.
 
-    Fabrication::Config.fabricator_dir = "data/fabricators"
+    Fabrication.configure do |config|
+      fabricator_dir = "data/fabricators"
+    end
 
 Or you can give it an array of locations.
 
-    Fabrication::Config.fabricator_dir = ["data/fabricators", "spec/fabricators"]
+    Fabrication.configure do |config|
+      fabricator_dir = ["data/fabricators", "spec/fabricators"]
+    end
 
 ### Rails 3 Generators
 
