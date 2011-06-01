@@ -59,15 +59,23 @@ $(function() {
     function walk() {
       populate();
       $conveyor.stop(true, false);
-      $items.animate({
-        right: "-=132px",
-        bottom: "-=76px"
-      }, 200, function(e) {
-          if ($conveyor.find(":animated").length == 1) {
-            placePanel();
-            punchPanel();
-          }
-      });
+      var elementsAreVisible = function() {
+        var st = $(window).scrollTop();
+        return (st < $("#items").height() || st + $(window).height() > $("#catcher_back").offset().top);
+      };
+      if(elementsAreVisible()) {
+        $items.animate({
+          right: "-=132px",
+          bottom: "-=76px"
+        }, 200, function(e) {
+            if ($conveyor.find(":animated").length == 1) {
+              placePanel();
+              punchPanel();
+            }
+        });
+      } else {
+        setTimeout(walk, 1000);
+      }
     };
 
     function populate() {
