@@ -43,21 +43,15 @@
           %h2 object generation for Rails
         .opening
           :markdown
-            Fabrication is an object generation library that allows you to define
-            Fabricators, which are the schematics for objects you want to generate. You can
-            then Fabricate objects as needed anywhere in your app or specs.
+            Fabrication is a simple, powerful object generation library. Just define Fabricators -- the schematics for your objects -- and quickly Fabricate objects as needed anywhere in your app or specs.
 
-            Currently supported object types are ...
+            Currently supported object types are:
 
             - Plain old Ruby objects
             - ActiveRecord objects
             - Mongoid Documents
             - Sequel Models
 
-            By default it will lazily generate active record associations. If you have
-            `has_many :widgets` defined, it will wait to generate the widgets until the
-            association is accessed. You can override this by appending `!` to the name of
-            the association when defining the Fabricator.
         .main
           ~ @content
     = haml :"_ventures"

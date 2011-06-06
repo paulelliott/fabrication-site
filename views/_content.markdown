@@ -4,41 +4,41 @@ Add this to your gemfile.
 
     gem 'fabrication'
 
-Now you can define fabricators in either `spec/fabricators/*.rb` or
-`test/fabricators/*.rb`. They are automatically loaded, so no additional
-requires are necessary.
+Now you can define fabricators in either `spec/fabricators/*.rb` or `test/fabricators/*.rb`. They're automatically loaded, so no additional requires are necessary.
 
 ### Configuration
 
 You can specify where the fabricators are loaded from with a configuration
-option.
+option ...
 
     Fabrication.configure do |config|
       fabricator_dir = "data/fabricators"
     end
 
-Or you can give it an array of locations.
+... or you can pass an array of locations.
 
     Fabrication.configure do |config|
       fabricator_dir = ["data/fabricators", "spec/fabricators"]
     end
 
+Fabricator will lazily generate ActiveRecord associations by default. If you have `has_many :widgets` defined, it will wait to generate the widgets until the association is accessed. You can override this by appending `!` to the name of the association when defining the Fabricator.
+
 ### Rails 3 Generators
 
-In your `config/application.rb` add this if you are using rspec
+In your `config/application.rb`, add this if you're using RSpec ...
 
     config.generators do |g|
       g.test_framework      :rspec, :fixture => true
       g.fixture_replacement :fabrication
     end
 
-And this if you are using test/unit:
+... and this if you are using test/unit:
 
     config.generators do |g|
       g.fixture_replacement :fabrication, :dir => "test/fabricators"
     end
 
-Once it is setup, a fabricator will be generated when you generate a model.
+Once it's setup, a fabricator will be generated when you generate a model.
 
     rails generate model widget
 
@@ -87,7 +87,7 @@ To generate "wockets" with specified attributes within "widgets":
 
 That will use the most recently defined "widget" and pass it into the Fabricator. That requires your "wocket" to have a setter for a "widget".
 
-In more complex cases where you have already created "widgets" and "wockets" and associated them with other objects, to set up an association between the former two:
+In more complex cases where you've already created "widgets" and "wockets" and associated them with other objects, to set up an association between the former two:
 
     And that wocket belongs to that widget
 
@@ -103,13 +103,13 @@ Define your fabricators.
       after_create { |company| company.update_attribute(:ceo, Fabricate(:drone, :name => 'Lead Drone') }
     end
 
-Breaking down the above, we are defining a "company" fabricator, which will generate Company model objects.
+Breaking down the above, we're defining a "company" fabricator, which will generate Company model objects.
 
-* The object has a name field, which is statically filled with "Fun Factory".
-* It has a has_many association to employees and will generate an array of 20 records as indicated by the :count => 20. The block is passed the company object being fabricated and index of the array being created.
-* It has a belongs_to association to location and this will be generated immediately with the company object. This is because of the "!" after the association name. Also, leaving off the block will cause "{ Fabricate(:location) }" to be automatically generated for you. It will singularize the name of the attribute (if String#singularize is present) and use that as the fabricator name.
-* After the object is built but before it is saved, it will update the name to "Another Fun Factory".
-* After the object is created, it will update the "ceo" association with a new "drone" record.
+- The object has a `name` field, which is statically filled with "Fun Factory".
+- It has a has_many association to employees and will generate an array of 20 records as indicated by the `:count => 20`. The block is passed the company object being fabricated and index of the array being created.
+- It has a belongs_to association to location and this will be generated immediately with the company object. This is because of the "!" after the association name. Also, leaving off the block will cause `{ Fabricate(:location) }` to be automatically generated for you. It will singularize the name of the attribute (if `String#singularize` is present) and use that as the fabricator name.
+- After the object is built but before it is saved, it will update the name to "Another Fun Factory".
+- After the object is created, it will update the "ceo" association with a new "drone" record.
 
 For a class with required arguments in its constructor, use the `on_init` method:
 
@@ -125,9 +125,9 @@ So you already have a company fabricator, but you need one that specifically gen
       type "LLC"
     end
 
-Setting the :from option will inherit the class and all the attributes from the named Fabricator.
+Setting the `:from` option will inherit the class and all the attributes from the named Fabricator.
 
-You can also explicitly specify the class being fabricated with the :class_name parameter.
+You can also explicitly specify the class being fabricated with the `:class_name` parameter.
 
     Fabricator(:llc, :class_name => :company) do
       type "LLC"
@@ -163,7 +163,7 @@ Sometimes you don't actually need to save an option when it is created but just 
 
     Fabricate.build(:company, :name => "Hashrocket")
 
-You can also fabricate the object as an attribute hash instead of an actual instance. This is useful for controller or API testing where the receiver wants a hash representation of the object. If you have activesupport it will be a HashWithIndifferentAccess, otherwise it will be a regular Ruby Hash.
+You can also fabricate the object as an attribute hash instead of an actual instance. This is useful for controller or API testing where the receiver wants a hash representation of the object. If you have ActiveSupport it will be a HashWithIndifferentAccess, otherwise it will be a regular Ruby hash.
 
     Fabricate.attributes_for(:company)
 
@@ -202,7 +202,7 @@ And in a semi-real use case, it would look something like this:
 
 ### Contributing
 
-I (paulelliott) am actively maintaining this project. If you would like to contribute, please fork the project, make your changes on a feature branch, and submit a pull request.
+I ([paulelliott](http://github.com/paulelliott)) am actively maintaining this project. If you would like to contribute, please fork the project, make your changes on a feature branch, and submit a pull request.
 
 To run rake successfully:
 
