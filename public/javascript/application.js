@@ -46,21 +46,24 @@ $(function() {
     $main.find("article").hide().first().show();
 
     $nav.find("li").click(function() {
-      $nav.find("li").removeClass();
 
       var $li = $(this);
       var $a = $main.find("article");
       var $new = $a.eq($li.addClass("selected").index());
 
-      $main.css("height", $main.height());
+      if ($new.is(":hidden")) {
+        $nav.find("li").removeClass();
+        $main.css("height", $main.height());
 
-      $a.filter(":visible").fadeOut(200, function() {
-        $main.animate({
-          height: $new.height()
-        }, 200, function() {
-          $new.fadeIn(200);
+        $a.filter(":visible").fadeOut(200, function() {
+          $main.animate({
+            height: $new.height()
+          }, 200, function() {
+            $new.fadeIn(200);
+          });
         });
-      });
+      }
+
       return false;
     });
   }
