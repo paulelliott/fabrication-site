@@ -5,7 +5,29 @@ $(function() {
     catch (e) {}
   }
 
-  (function($main) {
+  var $main = $(".main");
+
+  if ($("#conveyor").is(":visible")) {
+    buildExternalNav();
+  } else {
+    $("#wrapper").prepend($("<img/>", {src: "/images/bg_mobile.png"}));
+    collapseContent();
+  }
+
+  function collapseContent() {
+    var $h3s = $main.find("h3");
+    var $content = $main.children().not("h3");
+    $content.hide();
+    $h3s.click(function() {
+      var $new = $(this).nextUntil("h3");
+      $content.not($new).hide();
+      $new.toggle();
+      window.scrollTo(0, $(this).offset().top);
+    });
+  }
+
+  function buildExternalNav() {
+    $main.detach();
     var $nav = $("<nav />");
     var $ul = $("<ul />").appendTo($nav);
     var $article;
@@ -41,8 +63,7 @@ $(function() {
       });
       return false;
     });
-
-  })($(".main").detach());
+  }
 
   (function($conveyor) {
 
@@ -54,7 +75,9 @@ $(function() {
     var $glow = $("#glow");
     var $fire = $("#catcher div");
 
-    walk();
+    if($conveyor.is(":visible")) {
+      walk();
+    };
 
     function walk() {
       populate();
@@ -87,8 +110,8 @@ $(function() {
         var $c = $(this);
         if ($c.index() > 0) {
           $c.css({
-            right: "-=" + 132 * i + "px",
-            bottom: "-=" + 76 * i + "px"
+            "right": 590 - 132 * i + "px",
+            "bottom": 760 - 76 * i + "px"
           });
         }
         if (i > 5) {
