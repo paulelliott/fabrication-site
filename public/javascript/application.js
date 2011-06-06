@@ -52,7 +52,7 @@ $(function() {
       var $new = $a.eq($li.addClass("selected").index());
 
       if ($new.is(":hidden")) {
-        $nav.find("li").removeClass();
+        $nav.find("li").not($li).removeClass();
         $main.css("height", $main.height());
 
         $a.filter(":visible").fadeOut(200, function() {
@@ -65,7 +65,7 @@ $(function() {
       }
 
       return false;
-    });
+    }).filter(":first").click();
   }
 
   (function($conveyor) {
