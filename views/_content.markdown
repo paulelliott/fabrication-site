@@ -4,7 +4,11 @@ Add this to your gemfile.
 
     gem 'fabrication'
 
-Now you can define fabricators in either `spec/fabricators/*.rb` or `test/fabricators/*.rb`. They're automatically loaded, so no additional requires are necessary.
+Fabricators defined in the right place are automatically loaded so no
+additional requires are necessary.
+
+    spec/fabricators/*.rb
+    test/fabricators/*.rb
 
 ### Configuration
 
