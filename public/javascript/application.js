@@ -98,19 +98,28 @@ $(function() {
     var $cutout = $("#cutout");
     var $glow = $("#glow");
     var $fire = $("#catcher div");
+    var $leds = $("#placer div");
 
     if($conveyor.is(":visible")) {
       walk();
     };
 
+    var waiting = false;
+
     function walk() {
-      populate();
       $conveyor.stop(true, false);
       var elementsAreVisible = function() {
         var st = $(window).scrollTop();
         return (st < $("#placer").height() || st + $(window).height() > $("#catcher_back").offset().top);
       };
       if(elementsAreVisible()) {
+        clearInterval(waiting);
+        waiting = false;
+        populate();
+        $leds.css("width", "0").delay(300)
+          .animate({ width: 6 }, 0).delay(300)
+          .animate({ width: 14 }, 0).delay(300)
+          .animate({ width: 22 }, 0);
         $items.animate({
           right: "-=132px",
           bottom: "-=76px"
@@ -122,7 +131,9 @@ $(function() {
         });
       } else {
         $cutout.hide();
-        setTimeout(walk, 1000);
+        if (!waiting) {
+          waiting = setInterval(walk, 1000);
+        }
       }
     };
 
@@ -159,12 +170,12 @@ $(function() {
 
     function punchPanel() {
       $puncher.animate({ top: -60 }, 400, function() {
-        $cutout.show().css("top", 80);
+        $cutout.css("top", 80);
         $puncher.animate({ top: 0 }, 50, function() {
             $row.animate({ paddingTop: 10 }, 50).animate({ paddingTop: 0 }, 50);
             $row.find(":eq(3)").addClass("punched");
-            $cutout.animate({ top: $(document).height() + 400 }, 1000);
-            $fire.delay(600).fadeIn(50).fadeOut(800);
+            $cutout.show().animate({ top: $(document).height() }, 1400);
+            $fire.delay(1000).fadeIn(50).fadeOut(800);
             $puncher.delay(50).animate({ top: -100 }, 200);
         });
       });
