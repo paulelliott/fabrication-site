@@ -43,7 +43,7 @@ name.
 To use a different name from the class, you must specify `:from =>
 :symbolized_class_name` as the second argument.
 
-    Fabricator(:asshole, :from => :person)
+    Fabricator(:adult, :from => :person)
 
 The value of `:from` can be either a class name or the name of another
 fabricator.
