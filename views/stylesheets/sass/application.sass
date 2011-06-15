@@ -31,7 +31,7 @@ html
 
 #content
   position: relative
-  padding: 240px 0 0 0
+  padding: 240px 0 340px 0
   z-index: 2
   code
     margin: 0 3px
@@ -66,13 +66,12 @@ html
       list-style-type: square
       padding-left: 60px
   nav
-    background: #e0e7e4
-    margin: 0 0 20px 0
-    border-bottom: 2px solid #808784
     ul
       overflow: hidden
       padding-left: 20px
       li
+        border-bottom: 1px solid #cdd6d4
+        position: relative
         cursor: pointer
         font-size: 13px
         background: #f5faf6
@@ -84,11 +83,15 @@ html
         &:first-of-type
           border-left: 1px solid #cdd6d4
         &.selected, &:hover
-          background: #fff
+          background: #fffffa
           color: #4c504e
+        &.selected
+          border-bottom: 1px solid #fffffa
   .main
     clear: both
-    padding: 0 20px 340px 20px
+    padding: 20px
+    background: #fffffa
+    border-bottom: 2px solid #828785
     p, ul, ol
       font-size: 13px
       line-height: 20px
@@ -101,8 +104,7 @@ html
       padding-left: 40px
     h4
       font-size: 36px
-      color: #fff
-      text-shadow: 0 1px 1px #9aa09f
+      color: #4c504e
       font-weight: 500
       font-family: "atrament-web-1", "atrament-web-2", helvetica, arial, sans-serif
       margin: 0 0 20px 0
