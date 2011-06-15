@@ -7,18 +7,23 @@ body
   min-height: 400px
   color: #4c504e
 
-html.wf-active
-  #content
-    hgroup
-      padding-top: 0
-      h1
-        font-size: 60px
-      h2
-        font-size: 40px
-    nav
-      ul
-        li
-          font-size: 22px
+html
+  &.wf-loading
+    #content
+      hgroup, .main, nav
+        +opacity(0)
+  &.wf-active
+    #content
+      hgroup
+        padding-top: 0
+        h1
+          font-size: 60px
+        h2
+          font-size: 40px
+      nav
+        ul
+          li
+            font-size: 22px
 
 #wrapper
   position: relative

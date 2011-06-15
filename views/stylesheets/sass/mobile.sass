@@ -18,18 +18,23 @@ body
     @media only screen and (device-width: 768px)
       width: 25%
 
-html.wf-active
-  #content
-    hgroup
-      padding-top: 0
-      h1
-        font-size: 80px
-      h2
-        font-size: 34px
-    nav
-      ul
-        li
-          font-size: 22px
+html
+  &.wf-loading
+    #content
+      hgroup, .main
+        +opacity(0)
+  &.wf-active
+    #content
+      hgroup
+        padding-top: 0
+        h1
+          font-size: 80px
+        h2
+          font-size: 34px
+      nav
+        ul
+          li
+            font-size: 22px
 
 #conveyor,
 #catcher_back
