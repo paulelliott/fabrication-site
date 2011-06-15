@@ -5,6 +5,12 @@ $(function() {
     catch (e) {}
   }
 
+  $.fn.addID = function() {
+    return $(this).each(function() {
+      $(this).attr("id", $(this).text().toLowerCase().replace(" ", "-"));
+    });
+  };
+
   var $main = $(".main");
 
   if ($("#conveyor").is(":visible")) {
@@ -14,8 +20,14 @@ $(function() {
     collapseContent();
   }
 
+  if (window.location.hash) {
+    jQuery.fx.off = true;
+    $(window.location.hash.replace("!", "")).trigger("click");
+    jQuery.fx.off = false;
+  }
+
   function collapseContent() {
-    var $h3s = $main.find("h3");
+    var $h3s = $main.find("h3").addID();
     var $content = $main.children().not("h3");
     $content.hide();
     $h3s.click(function() {
@@ -23,6 +35,7 @@ $(function() {
       $content.not($new).hide();
       $new.toggle();
       window.scrollTo(0, $(this).offset().top);
+      window.location.hash = $(this).attr("id");
     });
   }
 
@@ -34,7 +47,7 @@ $(function() {
     $main.children().detach().each(function() {
       var $el = $(this);
       if ($el[0].nodeName === "H3") {
-        $("<li />").text($el.detach().text()).appendTo($ul);
+        $("<li />").text($el.detach().text()).appendTo($ul).addID();
         $article = $("<article />").appendTo($main);
       } else {
         $el.appendTo($article);
@@ -52,6 +65,7 @@ $(function() {
       var $new = $a.eq($li.addClass("selected").index());
 
       if ($new.is(":hidden")) {
+        window.location.hash = "!" + $(this).attr("id");
         $nav.find("li").not($li).removeClass();
         $main.css("height", $main.height());
 
