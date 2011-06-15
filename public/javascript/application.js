@@ -1,3 +1,9 @@
+/*
+  http://fabricationgem.org
+  by Cameron Daigle http://camerondaigle.com
+  for Hashrocket Ventures http://hashrocket.com
+*/
+
 $(function() {
 
   if (!(/^Win/.test(window.navigator.platform))) {
