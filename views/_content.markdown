@@ -256,43 +256,50 @@ Will produce:
 
 ### Cucumber Steps
 
-Packaged with the gem is a generator which will load some handy cucumber table steps into your step_definitions folder. You can get them by running `rails g fabrication:cucumber_steps`.
+Packaged with the gem is a generator which will load some handy cucumber steps
+into your step_definitions folder.
 
-To generate a single "widget" object, expecting a Fabricator(:widget) to be defined:
+    rails generate fabrication:cucumber_steps
+
+With a Widget Fabricator defined, you can easily fabricate a single "widget".
 
     Given 1 widget
 
-To generate a single "widget" with specified attributes:
+To fabricate a single "widget" with specified attributes:
 
     Given the following widget:
-      | name  | widget_1 |
-      | color | red      |
+      | name      | widget_1 |
+      | color     | red      |
+      | adjective | awesome  |
 
-To generate multiple "widgets":
+To fabricate multiple "widgets":
 
     Given 10 widgets
 
-To generate multiple "widgets" with specified attributes:
+To fabricate multiple "widgets" with specified attributes:
 
     Given the following widgets:
-      | name     | color |
-      | widget_1 | red   |
-      | widget_2 | blue  |
+      | name     | color | adjective |
+      | widget_1 | red   | awesome   |
+      | widget_2 | blue  | fantastic |
       ...
 
-To generate "wockets" nested within "widgets":
+To fabricate "wockets" that belong to widget you already fabricated:
 
     And that widget has 10 wockets
 
-To generate "wockets" with specified attributes within "widgets":
+To fabricate "wockets" with specified attributes that belong to your widget:
 
     And that widget has the following wocket:
       | title    | Amazing |
       | category | fancy   |
 
-That will use the most recently defined "widget" and pass it into the Fabricator. That requires your "wocket" to have a setter for a "widget".
+That will use the most recently fabricated "widget" and pass it into the wocket
+Fabricator. That requires your "wocket" to have a setter for a "widget".
 
-In more complex cases where you've already created "widgets" and "wockets" and associated them with other objects, to set up an association between the former two:
+In more complex cases where you've already created "widgets" and "wockets" and
+associated them with other objects, to set up an association between the former
+two:
 
     And that wocket belongs to that widget
 
