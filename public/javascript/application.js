@@ -87,7 +87,7 @@ $(function() {
       $conveyor.stop(true, false);
       var elementsAreVisible = function() {
         var st = $(window).scrollTop();
-        return (st < $("#items").height() || st + $(window).height() > $("#catcher_back").offset().top);
+        return (st < $("#placer").height() || st + $(window).height() > $("#catcher_back").offset().top);
       };
       if(elementsAreVisible()) {
         $items.animate({
@@ -126,11 +126,11 @@ $(function() {
     }
 
     function placePanel() {
-      $glow.delay(600).fadeIn(600, function() {
+      $glow.delay(600).animate({opacity: 0.3}, 600, function() {
         $panel.animate({ top: 206 }, 100, function() {
           $panel.css({ top: 94 });
           $row.find(":eq(5)").addClass("filled");
-          $glow.fadeOut(400, walk);
+          $glow.animate({opacity: 0}, 400, walk);
         });
       });
     }
@@ -141,8 +141,8 @@ $(function() {
         $puncher.animate({ top: 0 }, 50, function() {
             $row.animate({ paddingTop: 10 }, 50).animate({ paddingTop: 0 }, 50);
             $row.find(":eq(3)").addClass("punched");
-            $cutout.animate({ top: $(document).height() }, 1000);
-            $fire.delay(800).fadeIn(50).fadeOut(800);
+            $cutout.animate({ top: $(document).height() + 400 }, 1000);
+            $fire.delay(600).fadeIn(50).fadeOut(800);
             $puncher.delay(50).animate({ top: -100 }, 200);
         });
       });
