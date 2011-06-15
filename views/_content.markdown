@@ -200,25 +200,31 @@ regular Ruby hash.
 
 ### Sequences
 
-Sometimes you need a sequence of numbers while you're generating data. Fabrication provides you with an easy and flexible means for keeping track of sequences.
+A sequence allows you to get a series of numbers unique within the current
+process. Fabrication provides you with an easy and flexible means for keeping
+track of sequences.
 
-This will create a sequence named ":number" that will start at 0. Every time you call it, it will increment by one.
+You can create a named sequence that starts at 0 anywhere in your app with a
+simple command.
 
     Fabricate.sequence(:number)
 
-If you need to override the starting number, you can do it with a second parameter. It will always return the seed number on the first call and it will be ignored with subsequent calls.
+If you want to specify the starting number, you can do it with a second
+parameter. It will always return the seed number on the first call and it will
+be ignored with subsequent calls.
 
     Fabricate.sequence(:number, 99)
 
-If you are generating something like an email address, you can pass it a block and the block response will be returned.
+If you are generating something like an email address, you can pass it a block
+and the block response will be returned.
 
     Fabricate.sequence(:name) { |i| "Name #{i}" }
 
-And in a semi-real use case, it would look something like this:
+You can use the shorthand notation if you are using them in your fabricators.
 
     Fabricate(:person) do
-      ssn { Fabricate.sequence :ssn, 111111111 }
-      email { Fabricate.sequence(:email) { |i| "user#{i}@example.com" } }
+      ssn { sequence(:ssn, 111111111) }
+      email { sequence(:email) { |i| "user#{i}@example.com" } }
     end
 
 ### Rails 3 Generators
