@@ -74,6 +74,7 @@ $(function() {
             height: $new.height()
           }, 200, function() {
             $new.fadeIn(200);
+            $("#cutout").is(":animated") ? false : $("#cutout").hide();
           });
         });
       }
@@ -114,6 +115,7 @@ $(function() {
             }
         });
       } else {
+        $cutout.hide();
         setTimeout(walk, 1000);
       }
     };
