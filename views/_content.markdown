@@ -227,9 +227,10 @@ You can use the shorthand notation if you are using them in your fabricators.
       email { sequence(:email) { |i| "user#{i}@example.com" } }
     end
 
-### Rails 3 Generators
+### Rails 3
 
-In your `config/application.rb`, add this if you're using RSpec ...
+You can configure Rails 3 to produce fabricators when you generate models by
+specifying it in your `config/application.rb`. Use this if you are using rspec:
 
     config.generators do |g|
       g.test_framework      :rspec, :fixture => true
@@ -242,7 +243,7 @@ In your `config/application.rb`, add this if you're using RSpec ...
       g.fixture_replacement :fabrication, :dir => "test/fabricators"
     end
 
-Once it's setup, a fabricator will be generated when you generate a model.
+Once it's setup, a fabricator will be generated whenever you generate a model.
 
     rails generate model widget
 
