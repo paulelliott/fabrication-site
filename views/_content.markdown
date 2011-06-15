@@ -305,7 +305,9 @@ two:
 
 ### Contributing
 
-I ([paulelliott](http://github.com/paulelliott)) am actively maintaining this project. If you would like to contribute, please fork the project, make your changes on a feature branch, and submit a pull request.
+I ([paulelliott](http://github.com/paulelliott)) am actively maintaining this
+project. If you would like to contribute, please fork the project, make your
+changes on a feature branch, and submit a pull request.
 
 To run rake successfully:
 
