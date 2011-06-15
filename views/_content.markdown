@@ -1,14 +1,17 @@
 ### Installation
 
-Add this to your gemfile.
+Fabrication is actively tested against MRI 1.8.7 and 1.9.2, but it should work
+just about anywhere.
+
+To use it with Bundler just add it to your gemfile.
 
     gem 'fabrication'
 
 Fabricators defined in the right place are automatically loaded so no
 additional requires are necessary.
 
-    spec/fabricators/*.rb
-    test/fabricators/*.rb
+    spec/fabricators/**/*fabricator.rb
+    test/fabricators/**/*fabricator.rb
 
 ### Configuration
 
