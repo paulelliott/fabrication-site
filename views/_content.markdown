@@ -3,7 +3,7 @@
 Fabrication is actively tested against MRI 1.8.7 and 1.9.2, but it should work
 just about anywhere.
 
-To use it with Bundler just add it to your gemfile.
+To use it with Bundler, just add it to your gemfile.
 
     gem 'fabrication'
 
@@ -308,6 +308,8 @@ two:
 I ([paulelliott](http://github.com/paulelliott)) am actively maintaining this
 project. If you would like to contribute, please fork the project, make your
 changes on a feature branch, and submit a pull request.
+
+Naturally, the Fabrication source is [available on Github](https://github.com/paulelliott/fabrication).
 
 To run rake successfully:
 
