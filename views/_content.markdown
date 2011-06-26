@@ -303,6 +303,21 @@ two:
 
     And that wocket belongs to that widget
 
+You can verify that some number of objects were persisted to the database:
+
+    Then I should see 1 widget in the database
+
+You can also verify that a specific object was persisted:
+
+    Then I should see the following widget in the database:
+      | name  | Sprocket |
+      | gears | 4        |
+      | color | green    |
+
+That will look up the class defined in the fabricator for "widget" and run a
+where(...) with the parameterized table as an argument. It will verify that
+there is only one of these objects in the database, so be specific!
+
 ### Contributing
 
 I ([paulelliott](http://github.com/paulelliott)) am actively maintaining this
