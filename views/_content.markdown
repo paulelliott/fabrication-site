@@ -91,6 +91,18 @@ set it in the current object. This is great for `belongs_to` associations.
       vehicle { Fabricator(:vehicle) }
     end
 
+You can specify which fabricator to use in that situation as well.
+
+    Fabricator(:person) do
+      ride(:fabricator => :vehicle)
+    end
+
+...is equivalent to...
+
+    Fabricator(:person) do
+      ride { Fabricator(:vehicle) }
+    end
+
 Fabrication will lazily generate ActiveRecord associations by default. If you
 define `has_many :widgets`, it will wait to generate the widgets until the
 getter for the association is accessed. You can override this by appending `!`
