@@ -336,7 +336,7 @@ I ([paulelliott](http://github.com/paulelliott)) am actively maintaining this
 project. If you would like to contribute, please fork the project, make your
 changes on a feature branch, and submit a pull request.
 
-Naturally, the Fabrication source is [available on Github](https://github.com/paulelliott/fabrication).
+Naturally, the Fabrication source is [available on Github](https://github.com/paulelliott/fabrication), as is the source for the [Fabrication website](https://github.com/paulelliott/fabrication-site).
 
 To run rake successfully:
 
