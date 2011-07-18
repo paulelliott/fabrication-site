@@ -88,7 +88,7 @@ set it in the current object. This is great for `belongs_to` associations.
 ...is equivalent to...
 
     Fabricator(:person) do
-      vehicle { Fabricator(:vehicle) }
+      vehicle { Fabricate(:vehicle) }
     end
 
 You can specify which fabricator to use in that situation as well.
@@ -100,7 +100,7 @@ You can specify which fabricator to use in that situation as well.
 ...is equivalent to...
 
     Fabricator(:person) do
-      ride { Fabricator(:vehicle) }
+      ride { Fabricate(:vehicle) }
     end
 
 Fabrication will lazily generate ActiveRecord associations by default. If you
