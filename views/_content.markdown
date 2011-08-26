@@ -330,6 +330,16 @@ That will look up the class defined in the fabricator for "widget" and run a
 where(...) with the parameterized table as an argument. It will verify that
 there is only one of these objects in the database, so be specific!
 
+### Extras
+
+Vim users can add Fabrication support by adding this to your .vimrc.
+
+    autocmd User Rails Rnavcommand fabricator spec/fabricators -suffix=_fabricator.rb -default=model()
+
+You can then open Fabricator files like this.
+
+    :Rfabricator your_model
+
 ### Contributing
 
 I ([paulelliott](http://github.com/paulelliott)) am actively maintaining this
