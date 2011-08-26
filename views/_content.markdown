@@ -216,10 +216,14 @@ A sequence allows you to get a series of numbers unique within the current
 process. Fabrication provides you with an easy and flexible means for keeping
 track of sequences.
 
-You can create a named sequence that starts at 0 anywhere in your app with a
-simple command.
+You can create a sequence that starts at 0 anywhere in your app with a simple
+command.
 
-    Fabricate.sequence(:number)
+    Fabricate.sequence
+
+You can name them by passing an argument to sequence.
+
+    Fabricate.sequence(:name)
 
 If you want to specify the starting number, you can do it with a second
 parameter. It will always return the seed number on the first call and it will
