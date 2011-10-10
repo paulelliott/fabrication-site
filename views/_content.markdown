@@ -160,6 +160,16 @@ To hook into Fabrication's build cycle for the object, you can use
 The callbacks are all stackable, meaning that you can declare multiple in a
 fabricator and they will not be clobbered when you inherit another fabricator.
 
+#### Reloading
+
+If you need to reset fabrication back to its original state after it has been
+loaded, call:
+
+    Fabrication.clear_definitions
+
+This is useful if you are using something like Spork and reloading the whole
+environment is not desirable.
+
 ### Fabricating Objects
 
 #### The Basics
