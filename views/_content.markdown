@@ -142,7 +142,7 @@ You can also explicitly specify the class being fabricated with the `:class_name
 You can specify callbacks in your Fabricator that are separate from the
 object's callbacks.
 
-If you have an object with required arguments in the contructor, you can use
+If you have an object with required arguments in the constructor, you can use
 the `on_init` callback to supply them.
 
     Fabricator(:location) do
