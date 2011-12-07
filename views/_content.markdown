@@ -360,6 +360,14 @@ there is only one of these objects in the database, so be specific!
 
 ### Extras
 
+#### Getting Help
+
+Email the fabrication [mailing list](https://groups.google.com/group/fabricationgem) if you need extra help or have specific questions.
+
+You can also view the [raw version of this documentation](https://github.com/paulelliott/fabrication-site/blob/master/views/_content.markdown).
+
+#### Vim
+
 Vim users can add Fabrication support by adding this to your .vimrc.
 
     autocmd User Rails Rnavcommand fabricator spec/fabricators -suffix=_fabricator.rb -default=model()
