@@ -1,7 +1,6 @@
 ### Installation
 
-Fabrication is actively tested against MRI 1.8.7 and 1.9.2, but it should work
-just about anywhere.
+Fabrication is tested against Ruby 1.8.7, 1.9.2, 1.9.3, Rubinius, and REE.
 
 To use it with Bundler, just add it to your gemfile.
 
