@@ -229,21 +229,33 @@ You can create a sequence that starts at 0 anywhere in your app with a simple
 command.
 
     Fabricate.sequence
+    # => 0
+    # => 1
+    # => 2
 
 You can name them by passing an argument to sequence.
 
     Fabricate.sequence(:name)
+    # => 0
+    # => 1
+    # => 2
 
 If you want to specify the starting number, you can do it with a second
 parameter. It will always return the seed number on the first call and it will
 be ignored with subsequent calls.
 
     Fabricate.sequence(:number, 99)
+    # => 99
+    # => 100
+    # => 101
 
 If you are generating something like an email address, you can pass it a block
 and the block response will be returned.
 
     Fabricate.sequence(:name) { |i| "Name #{i}" }
+    # => "Name 0"
+    # => "Name 1"
+    # => "Name 2"
 
 You can use the shorthand notation if you are using them in your fabricators.
 
@@ -251,6 +263,9 @@ You can use the shorthand notation if you are using them in your fabricators.
       ssn { sequence(:ssn, 111111111) }
       email { sequence(:email) { |i| "user#{i}@example.com" } }
     end
+    # => <Person ssn: 111111111, email: "user0@example.com">
+    # => <Person ssn: 111111112, email: "user1@example.com">
+    # => <Person ssn: 111111113, email: "user2@example.com">
 
 ### Rails 3
 
