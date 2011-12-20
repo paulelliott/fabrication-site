@@ -280,6 +280,7 @@ specifying it in your `config/application.rb`. Use this if you are using rspec:
 ... and this if you are using test/unit:
 
     config.generators do |g|
+      g.test_framework      :test_unit, :fixture_replacement => :fabrication
       g.fixture_replacement :fabrication, :dir => "test/fabricators"
     end
 
