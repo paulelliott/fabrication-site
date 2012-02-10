@@ -297,10 +297,14 @@ Will produce:
 
 ### Cucumber Steps
 
+#### Installing
+
 Packaged with the gem is a generator which will load some handy cucumber steps
 into your step_definitions folder.
 
     rails generate fabrication:cucumber_steps
+
+#### Step Definitions
 
 With a Widget Fabricator defined, you can easily fabricate a single "widget".
 
@@ -358,6 +362,43 @@ You can also verify that a specific object was persisted:
 That will look up the class defined in the fabricator for "widget" and run a
 where(...) with the parameterized table as an argument. It will verify that
 there is only one of these objects in the database, so be specific!
+
+#### Transforms
+
+You can define transforms to apply to tables in the cucumber steps. They work
+on both vertical and horizontal tables and allow you to remap column values.
+You can provide string data and perform logic on it to set objects instead.
+You can put them in your `spec/fabricators` folder or whatever you have
+configured.
+
+For example, you can define transforms on all columns named "company". It will
+pass the strings from the cells into a lambda and set the return value to the
+attribute on the generated object.
+
+    Fabrication::Transform.define(:company, lambda{ |company_name| Company.where(:name => company_name).first })
+
+You can invoke it by putting the expected text in the cells and matching the
+column name to the symbol.
+
+    Scenario: a single object with transform to apply
+      Given the following company:
+        | name | Widgets Inc |
+      Given the following division:
+        | name    | Southwest   |
+        | company | Widgets Inc |
+      Then that division should reference that company
+
+    Scenario: multiple objects with transform to apply
+      Given the following company:
+        | name | Widgets Inc |
+      Given the following divisions:
+        | name      | company     |
+        | Southwest | Widgets Inc |
+        | North     | Widgets Inc |
+      Then they should reference that company
+
+When the divisions are generated, they will receive the company object as
+looked up by the lambda.
 
 ### Extras
 
