@@ -161,6 +161,16 @@ To hook into Fabrication's build cycle for the object, you can use
 The callbacks are all stackable, meaning that you can declare multiple in a
 fabricator and they will not be clobbered when you inherit another fabricator.
 
+#### Aliases
+
+You can provide aliases for a fabricator by supplying the :aliases option to
+the Fabricator call.
+
+    Fabricator(:thingy, aliases: [:widget, :wocket])
+
+You can now call Fabricate with :thingy, :widget, or :wocket and receive back
+the generated object.
+
 #### Reloading
 
 If you need to reset fabrication back to its original state after it has been
