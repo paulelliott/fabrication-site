@@ -430,6 +430,12 @@ You can then open Fabricator files like this.
 
     :Rfabricator your_model
 
+#### Make Syntax
+
+If you are migrating to Fabrication from Machinist, you can include make syntax
+to help ease the transition. Simply require `fabrication/syntax/make` and you
+will get `make` and `make!` mixed into your classes.
+
 ### Contributing
 
 I ([paulelliott](http://github.com/paulelliott)) am actively maintaining this
