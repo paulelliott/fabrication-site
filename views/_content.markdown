@@ -436,6 +436,14 @@ If you are migrating to Fabrication from Machinist, you can include make syntax
 to help ease the transition. Simply require `fabrication/syntax/make` and you
 will get `make` and `make!` mixed into your classes.
 
+You can also provide a suffix to the class's primary Fabricator.
+
+    Fabricator(:author_with_books, from: :author) do
+      books(count: 2)
+    end
+
+    Author.make(:with_books)
+
 ### Contributing
 
 I ([paulelliott](http://github.com/paulelliott)) am actively maintaining this
