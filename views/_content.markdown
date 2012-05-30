@@ -76,6 +76,12 @@ fields above the current one will be available.
       email { |person| "#{person.name.parameterize}@example.com" }
     end
 
+You can also reference fields whose names are reserved words with the block variable.
+
+    Fabricator(:person) do |f|
+      f.alias 'James Bond'
+    end
+
 #### Associations
 
 You can associate another fabricator by just writing the attribute name.
