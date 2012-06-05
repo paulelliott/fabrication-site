@@ -41,10 +41,10 @@ name.
 
     Fabricator(:person)
 
-To use a different name from the class, you must specify `:from =>
+To use a different name from the class, you must specify `from:
 :symbolized_class_name` as the second argument.
 
-    Fabricator(:adult, :from => :person)
+    Fabricator(:adult, from: :person)
 
 The value of `:from` can be either a class name or the name of another
 fabricator.
@@ -101,7 +101,7 @@ set it in the current object. This is great for `belongs_to` associations.
 You can specify which fabricator to use in that situation as well.
 
     Fabricator(:person) do
-      ride(:fabricator => :vehicle)
+      ride(fabricator: :vehicle)
     end
 
 ...is equivalent to...
@@ -125,14 +125,14 @@ You can also generate arrays of objects with the count parameter. The attribute
 block receives the object being generated as well as the incrementing value.
 
     Fabricator(:person) do
-      children(:count => 3) { |parent, i| Fabricate(:person, :parent => parent) }
+      children(count: 3) { |parent, i| Fabricate(:person, parent: parent) }
     end
 
 #### Inheritance
 
 You can inherit attributes from other fabricators by using the `:from` attribute.
 
-    Fabricator(:llc, :from => :company) do
+    Fabricator(:llc, from: :company) do
       type "LLC"
     end
 
@@ -140,7 +140,7 @@ Setting the `:from` option will inherit the class and all the attributes from th
 
 You can also explicitly specify the class being fabricated with the `:class_name` parameter.
 
-    Fabricator(:llc, :class_name => :company) do
+    Fabricator(:llc, class_name: :company) do
       type "LLC"
     end
 
@@ -161,7 +161,7 @@ To hook into Fabrication's build cycle for the object, you can use
 
     Fabricator(:place) do
       after_build { |place| place.geolocate! }
-      after_create { |place| Fabricate(:restaurant, :place => place) }
+      after_create { |place| Fabricate(:restaurant, place: place) }
     end
 
 The callbacks are all stackable, meaning that you can declare multiple in a
@@ -202,7 +202,7 @@ Fabricator.
 To set additional attributes or override what is in the Fabricator, you can
 pass a hash to Fabricate with the fields you want to set.
 
-    Fabricate(:person, :first_name => "Corbin", :last_name => "Dallas")
+    Fabricate(:person, first_name: "Corbin", last_name: "Dallas")
 
 The arguments to Fabricate always take precedence over anything defined in the
 Fabricator.
@@ -212,9 +212,9 @@ Fabricator.
 In addition to the hash, you can pass a block to Fabricate and all the features
 of Fabricator's available to you at object generation time.
 
-    Fabricate(:person, :name => "Franky Four Fingers") do
+    Fabricate(:person, name: "Franky Four Fingers") do
       addiction "Gambling"
-      fingers(:count => 9)
+      fingers(count: 9)
     end
 
 The hash will overwrite any fields defined in the block.
@@ -291,15 +291,15 @@ You can configure Rails 3 to produce fabricators when you generate models by
 specifying it in your `config/application.rb`. Use this if you are using rspec:
 
     config.generators do |g|
-      g.test_framework      :rspec, :fixture => true
+      g.test_framework      :rspec, fixture: true
       g.fixture_replacement :fabrication
     end
 
 ... and this if you are using test/unit:
 
     config.generators do |g|
-      g.test_framework      :test_unit, :fixture_replacement => :fabrication
-      g.fixture_replacement :fabrication, :dir => "test/fabricators"
+      g.test_framework      :test_unit, fixture_replacement: :fabrication
+      g.fixture_replacement :fabrication, dir: "test/fabricators"
     end
 
 Once it's setup, a fabricator will be generated whenever you generate a model.
@@ -393,7 +393,7 @@ For example, you can define transforms on all columns named "company". It will
 pass the strings from the cells into a lambda and set the return value to the
 attribute on the generated object.
 
-    Fabrication::Transform.define(:company, lambda{ |company_name| Company.where(:name => company_name).first })
+    Fabrication::Transform.define(:company, lambda{ |company_name| Company.where(name: company_name).first })
 
 You can invoke it by putting the expected text in the cells and matching the
 column name to the symbol.
