@@ -20,13 +20,13 @@ You can specify where the fabricators are loaded from with a configuration
 option ...
 
     Fabrication.configure do |config|
-      config.fabricator_dir = "data/fabricators"
+      config.fabricator_path = "data/fabricators"
     end
 
 ... or you can pass an array of locations.
 
     Fabrication.configure do |config|
-      config.fabricator_dir = ["data/fabricators", "spec/fabricators"]
+      config.fabricator_path = ["data/fabricators", "spec/fabricators"]
     end
 
 ### Defining Fabricators
