@@ -46,14 +46,13 @@ To use a different name from the class, you must specify `from:
 
     Fabricator(:adult, from: :person)
 
-The value of `:from` can be either a class name or the name of another
-fabricator.
+The value of `:from` can be either a class name or the name of another fabricator.
 
 #### Attributes
 
-The block for the Fabricator does not take a block variable. You can simply
-list the attributes to be generated and they will be created in order of
-declaration.
+The Fabricator block does not require a block variable, but one can be
+supplied. You can list the attributes to be generated and they will be created
+in order of declaration.
 
     Fabricator(:person) do
       name 'Greg Graffin'
@@ -67,13 +66,12 @@ To produce dynamic values, you can pass a block to the attribute.
       profession { %w(Butcher Baker Candlestick\ Maker).sample }
     end
 
-You can also access the current state of the object being generated with each
-attribute. Note that attributes are processed in order of declaration, so only
-fields above the current one will be available.
+Attributes are processed in order of declaration and fields above the current
+one are available via a block parameter.
 
     Fabricator(:person) do
       name { Faker::Name.name }
-      email { |person| "#{person.name.parameterize}@example.com" }
+      email { |attrs| "#{attrs[:name].parameterize}@example.com" }
     end
 
 You can also reference fields whose names are reserved words with the block variable.
@@ -110,17 +108,6 @@ You can specify which fabricator to use in that situation as well.
       ride { Fabricate(:vehicle) }
     end
 
-Fabrication will lazily generate ActiveRecord associations by default. If you
-define `has_many :widgets`, it will wait to generate the widgets until the
-getter for the association is accessed. You can override this by appending `!`
-to the name of the association in the Fabricator. You would typically want to
-do this in the case of a `belongs_to` or any other required association.
-
-    Fabricator(:person) do
-      mother!
-      father!
-    end
-
 You can also generate arrays of objects with the count parameter. The attribute
 block receives the object being generated as well as the incrementing value.
 
@@ -149,19 +136,19 @@ You can also explicitly specify the class being fabricated with the `:class_name
 You can specify callbacks in your Fabricator that are separate from the
 object's callbacks.
 
-If you have an object with required arguments in the constructor, you can use
-the `on_init` callback to supply them.
-
-    Fabricator(:location) do
-      on_init { init_with(30.284167, -81.396111) }
-    end
-
 To hook into Fabrication's build cycle for the object, you can use
 `after_build` and `after_create`.
 
     Fabricator(:place) do
       after_build { |place| place.geolocate! }
       after_create { |place| Fabricate(:restaurant, place: place) }
+    end
+
+If you have an object with required arguments in the constructor, you can use
+the `on_init` callback to supply them.
+
+    Fabricator(:location) do
+      on_init { init_with(30.284167, -81.396111) }
     end
 
 The callbacks are all stackable, meaning that you can declare multiple in a
@@ -210,7 +197,7 @@ Fabricator.
 #### Fabricating With Blocks
 
 In addition to the hash, you can pass a block to Fabricate and all the features
-of Fabricator's available to you at object generation time.
+of a Fabricator definition are available to you at object generation time.
 
     Fabricate(:person, name: "Franky Four Fingers") do
       addiction "Gambling"
@@ -221,19 +208,30 @@ The hash will overwrite any fields defined in the block.
 
 #### Building
 
-If you are using an ORM with a `save` method, sometimes it is necessary to just
-build and not actually save objects. In that case, you can use
+If you don't want to persist the object to the database, you can use
 `Fabricate.build` and skip the save step. All the normal goodness when
 Fabricating is available for building as well.
 
     Fabricate.build(:person)
 
+When you invoke a build, all other `Fabricate` calls will be processed as
+`build` until the build completes. If the object being built causes other
+objects to be generated, they will not be persisted to the database either.
+
+For example, calling build on `person` will cascade down to `Fabricate(:car)`
+and they will not be persisted either.
+
+    Fabricate.build(:person) do
+      cars { 2.times { Fabricate(:car) } }
+    end
+
+
 #### Attributes Hash
 
-You can also receive the object back in the form of a hash. This processes all
-the fields defined, but doesn't actually create the object. If you have
-ActiveSupport it will be a HashWithIndifferentAccess, otherwise it will be a
-regular Ruby hash.
+You can receive any object back in the form of a hash. This processes all the
+defined fields, but doesn't actually create or persist the object. If
+`ActiveSupport` is available it will be a `HashWithIndifferentAccess`, otherwise it
+will be a regular Ruby `Hash`.
 
     Fabricate.attributes_for(:company)
 
@@ -454,7 +452,7 @@ You can also provide a suffix to the class's primary Fabricator.
 
 I ([paulelliott](http://github.com/paulelliott)) am actively maintaining this
 project. If you would like to contribute, please fork the project, make your
-changes on a feature branch, and submit a pull request.
+changes with specs on a feature branch, and submit a pull request.
 
 Naturally, the Fabrication source is [available on Github](https://github.com/paulelliott/fabrication) as is the source for the [Fabrication website](https://github.com/paulelliott/fabrication-site).
 
