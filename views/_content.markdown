@@ -164,6 +164,27 @@ the Fabricator call.
 You can now call Fabricate with :thingy, :widget, or :wocket and receive back
 the generated object.
 
+#### Transient Attributes
+
+Transient attributes allow you to have variables in the Fabricator that are not
+set in the generated class. You can interact with them during attribute
+generation as if they were regular attributes, but they are stripped out when
+the attributes are mass-assigned to the object.
+
+    Fabricator(:city) do
+      transient :asian
+      name { |attrs| attrs[:asian] ? "Tokyo" : "Stockholm" }
+    end
+
+    Fabricate(:city, asian: true)
+    # => <City name: 'Tokyo'>
+
+You can specify multiple transients by passing them all to `transient`.
+
+    Fabricator(:the_count) do
+      transient :one, :two, :three
+    end
+
 #### Reloading
 
 If you need to reset fabrication back to its original state after it has been
