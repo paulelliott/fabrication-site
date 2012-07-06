@@ -131,6 +131,17 @@ You can also explicitly specify the class being fabricated with the `:class_name
       type "LLC"
     end
 
+#### Custom Initialization
+
+If you don't want to build the object through the normal initialization means, you can override it with the `initialize_with` option.
+
+    Fabricator(:car) do
+      initialize_with { Manufacturer.produce(:new_car) }
+      color 'red'
+    end
+
+The object instantiated and returned by the initialize_with block will have all the defined attributes applied and it will be returned by the Fabricate method call.
+
 #### Callbacks
 
 You can specify callbacks in your Fabricator that are separate from the
@@ -245,7 +256,6 @@ and they will not be persisted either.
     Fabricate.build(:person) do
       cars { 2.times { Fabricate(:car) } }
     end
-
 
 #### Attributes Hash
 
