@@ -8,4 +8,4 @@ This is the source for the [documentation website](http://fabricationgem.org/) f
 
 1. Clone the project
 2. Run bundler
-3. Start the server with `rackup`
+3. Start the server with `middleman`
