@@ -1,5 +1,4 @@
 .DS_Store
-.sass-cache/
-.sass-cache/*
-site/*.html
-site/stylesheets
+/.bundle
+/build
+/.sass-cache

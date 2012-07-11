@@ -1,6 +1,4 @@
-source 'http://rubygems.org'
+source :rubygems
 
-gem 'staticmatic'
-gem 'haml'
+gem 'middleman'
 gem 'rdiscount'
-gem 'sass'
