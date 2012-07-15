@@ -109,10 +109,11 @@ You can specify which fabricator to use in that situation as well.
     end
 
 You can also generate arrays of objects with the count parameter. The attribute
-block receives the object being generated as well as the incrementing value.
+block receives the object being generated as well as the incrementing value. It works just like you would expect if you leave off the block.
 
     Fabricator(:person) do
-      children(count: 3) { |parent, i| Fabricate(:person, parent: parent) }
+      open_souce_projects(count: 5)
+      children(count: 3) { |attrs, i| Fabricate(:person, name: "Kid #{i}") }
     end
 
 #### Inheritance
