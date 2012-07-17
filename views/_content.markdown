@@ -74,7 +74,9 @@ one are available via a block parameter.
       email { |attrs| "#{attrs[:name].parameterize}@example.com" }
     end
 
-You can also reference fields whose names are reserved words with the block variable.
+#### Reserved Words ####
+
+You can reference fields whose names are reserved words with the block variable.
 
     Fabricator(:person) do |f|
       f.alias 'James Bond'
