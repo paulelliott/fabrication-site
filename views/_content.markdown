@@ -429,9 +429,9 @@ You can provide string data and perform logic on it to set objects instead.
 You can put them in your `spec/fabricators` folder or whatever you have
 configured.
 
-For example, you can define transforms on all columns named "company". It will
+For example, you can define a transform on all fields named "company". It will
 pass the strings from the cells into a lambda and set the return value to the
-attribute on the generated object.
+attribute, in effect replacing the supplied company name with an actual instance of the company in the generated object.
 
     Fabrication::Transform.define(:company, lambda{ |company_name| Company.where(name: company_name).first })
 
@@ -457,6 +457,10 @@ column name to the symbol.
 
 When the divisions are generated, they will receive the company object as
 looked up by the lambda.
+
+You can also scope them to a specific model with `only_for`.
+
+    Fabrication::Transform.only_for(:division, :company, lambda { |company_name| Company.where(name: company_name).first })
 
 ### Extras
 
