@@ -16,18 +16,26 @@ additional requires are necessary.
 
 ### Configuration
 
-You can specify where the fabricators are loaded from with a configuration
-option ...
+To override these settings, put a fabrication.rb in your support folder with a configure block
 
     Fabrication.configure do |config|
-      config.fabricator_path = "data/fabricators"
+      config.fabricator_path = 'data/fabricators'
+      config.path_prefix = Rails.root
     end
 
-... or you can pass an array of locations.
+#### Supported Options
 
-    Fabrication.configure do |config|
-      config.fabricator_path = ["data/fabricators", "spec/fabricators"]
-    end
+##### fabricator_path
+
+Specifies the path within your project where Fabricator definitions are located.
+
+Default: ['test/fabricators', 'spec/fabricators']
+
+##### path_prefix
+
+Allows you to specify the location of your application on the file system. This is especially useful when working with Rails engines.
+
+Default: Rails.root if defined, otherwise '.'
 
 ### Defining Fabricators
 
