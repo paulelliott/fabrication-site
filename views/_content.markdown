@@ -335,10 +335,17 @@ specifying it in your `config/application.rb`. Use this if you are using rspec:
       g.fixture_replacement :fabrication
     end
 
-... and this if you are using test/unit:
+... or this if you are using test/unit:
 
     config.generators do |g|
       g.test_framework      :test_unit, fixture_replacement: :fabrication
+      g.fixture_replacement :fabrication, dir: "test/fabricators"
+    end
+
+... or this if you are using minitest:
+
+    config.generators do |g|
+      g.test_framework      :mini_test, fixture_replacement: :fabrication
       g.fixture_replacement :fabrication, dir: "test/fabricators"
     end
 
