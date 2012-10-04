@@ -21,6 +21,7 @@ To override these settings, put a fabrication.rb in your support folder with a c
     Fabrication.configure do |config|
       config.fabricator_path = 'data/fabricators'
       config.path_prefix = Rails.root
+      config.sequence_start = 10000
     end
 
 #### Supported Options
@@ -36,6 +37,12 @@ Default: ['test/fabricators', 'spec/fabricators']
 Allows you to specify the location of your application on the file system. This is especially useful when working with Rails engines.
 
 Default: Rails.root if defined, otherwise '.'
+
+##### sequence_start
+
+Allows you to specify the default starting number for all sequences. This can still be overridden for specific sequences.
+
+Default: 0
 
 ### Defining Fabricators
 
@@ -306,6 +313,9 @@ be ignored with subsequent calls.
     # => 99
     # => 100
     # => 101
+
+Alternatively, you can specify the starting point for all sequences globally
+with a configuration setting. (See Configuration tab)
 
 If you are generating something like an email address, you can pass it a block
 and the block response will be returned.
