@@ -129,7 +129,7 @@ You can also generate arrays of objects with the count parameter. The attribute
 block receives the object being generated as well as the incrementing value. It works just like you would expect if you leave off the block.
 
     Fabricator(:person) do
-      open_souce_projects(count: 5)
+      open_source_projects(count: 5)
       children(count: 3) { |attrs, i| Fabricate(:person, name: "Kid #{i}") }
     end
 
