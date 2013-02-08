@@ -151,26 +151,44 @@ You can also explicitly specify the class being fabricated with the `:class_name
 
 #### Custom Initialization
 
-If you don't want to build the object through the normal initialization means, you can override it with the `initialize_with` option.
+If you don't want to build the object through the normal initialization means,
+you can override it with the `initialize_with` option.
 
     Fabricator(:car) do
       initialize_with { Manufacturer.produce(:new_car) }
       color 'red'
     end
 
-The object instantiated and returned by the initialize_with block will have all the defined attributes applied and it will be returned by the Fabricate method call.
+The object instantiated and returned by the initialize_with block will have all
+the defined attributes applied and it will be returned by the Fabricate method
+call.
 
 #### Callbacks
 
 You can specify callbacks in your Fabricator that are separate from the
 object's callbacks.
 
-To hook into Fabrication's build cycle for the object, you can use
-`after_build` and `after_create`.
+To hook into Fabrication's build cycle for the object, you can use the following callbacks:
+
+    before_validation
+    after_validation
+    before_save
+    before_create
+    after_create
+    after_save
+
+They happen right where you would expect them to. You can define them in your
+Fabricators as a block that optionally receives the object being fabricated and
+a hash of any transient attributes defined.
+
+As with anything that works in the Fabricator, you can also define them when
+you call Fabricate and they will work just like you'd expect. The callbacks are
+also stackable, meaning that you can declare multiple of the same type in a
+fabricator and they will not be clobbered when you inherit another fabricator.
 
     Fabricator(:place) do
-      after_build { |place| place.geolocate! }
-      after_create { |place| Fabricate(:restaurant, place: place) }
+      before_validation { |place, transients| place.geolocate! }
+      after_create { |place, transients| Fabricate(:restaurant, place: place) }
     end
 
 If you have an object with required arguments in the constructor, you can use
@@ -179,9 +197,6 @@ the `on_init` callback to supply them.
     Fabricator(:location) do
       on_init { init_with(30.284167, -81.396111) }
     end
-
-The callbacks are all stackable, meaning that you can declare multiple in a
-fabricator and they will not be clobbered when you inherit another fabricator.
 
 #### Aliases
 
