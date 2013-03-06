@@ -170,6 +170,7 @@ object's callbacks.
 
 To hook into Fabrication's build cycle for the object, you can use the following callbacks:
 
+    after_build
     before_validation
     after_validation
     before_save
