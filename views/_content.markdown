@@ -1,8 +1,8 @@
 ### Installation
 
-Fabrication is tested against Ruby 1.9.3 and Rubinius.
+Fabrication is tested against Ruby 1.9.3, 2.0.0 and Rubinius.
 
-(version 1.2.0 is the last release with 1.8 compatibility)
+(version 1.2.0 is the last release with 1.8.x compatibility)
 
 To use it with Bundler, just add it to your gemfile.
 
