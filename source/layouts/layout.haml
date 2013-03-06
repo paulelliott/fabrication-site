@@ -47,17 +47,17 @@
           %h1 Fabrication
           %h2 object generation for Ruby
         .opening
-          :markdown
-            Fabrication is a simple and powerful object generation library. Just define Fabricators -- the schematics for your objects -- and quickly Fabricate objects as needed anywhere in your app or specs.
+          %p Fabrication is a simple and powerful object generation library. Just define Fabricators -- the schematics for your objects -- and quickly Fabricate objects as needed anywhere in your app or specs.
 
-            Currently supported object types are:
+          %p Currently supported object types are:
 
-            - #{link_to "ActiveRecord Models", "http://guides.rubyonrails.org/active_record_querying.html"}
-            - #{link_to "Mongoid Documents", "http://mongoid.org"}
-            - #{link_to "Sequel Models", "http://sequel.rubyforge.org"}
-            - #{link_to "DataMapper Resources", "http://datamapper.org"}
-            - #{link_to "Keymaker Nodes", "https://github.com/therubymug/keymaker"}
-            - Any other classes
+          %ul
+            %li= link_to "ActiveRecord Models", "http://guides.rubyonrails.org/active_record_querying.html"
+            %li= link_to "Mongoid Documents", "http://mongoid.org"
+            %li= link_to "Sequel Models", "http://sequel.rubyforge.org"
+            %li= link_to "DataMapper Resources", "http://datamapper.org"
+            %li= link_to "Keymaker Nodes", "https://github.com/therubymug/keymaker"
+            %li Any other classes
 
         .main= yield
     %footer#ventures
@@ -65,8 +65,7 @@
         %a(href="http://hashrocket.com")
           %img(src="/images/ventures_logo.png")
           %h1 This project is powered by Hashrocket
-          %p
-            Hashrocket is a premiere Ruby on Rails design &amp; development consultancy.
+          %p Hashrocket is a premiere Ruby on Rails design &amp; development consultancy.
           %p
             Learn more about us at
             %span Hashrocket.com
