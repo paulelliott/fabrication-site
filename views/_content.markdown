@@ -503,15 +503,13 @@ Email the fabrication [mailing list](https://groups.google.com/group/fabrication
 
 You can also view the [raw version of this documentation](https://github.com/paulelliott/fabrication-site/blob/master/views/_content.markdown).
 
+If all else fails, open an [issue on GitHub](https://github.com/paulelliott/fabrication/issues).
+
 #### Vim
 
-Vim users can add Fabrication support by adding this to your .vimrc.
+Fabrication support is built into [rails.vim](https://github.com/tpope/vim-rails)! Once you install it, you can open Fabricator files like this:
 
-    autocmd User Rails Rnavcommand fabricator spec/fabricators -suffix=_fabricator.rb -default=model()
-
-You can then open Fabricator files like this.
-
-    :Rfabricator your_model
+    :Rfabricator your_fabricator
 
 #### Make Syntax
 
@@ -524,7 +522,6 @@ You can also provide a suffix to the class's primary Fabricator.
     Fabricator(:author_with_books, from: :author) do
       books(count: 2)
     end
-
     Author.make(:with_books)
 
 ### Contributing
