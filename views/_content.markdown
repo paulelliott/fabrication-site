@@ -230,6 +230,13 @@ You can specify multiple transients by passing them all to `transient`.
       transient :one, :two, :three
     end
 
+You can also specify default values with an options hash at the end.
+
+    Fabricator(:fruit) do
+      transient :color, delicious: true
+    end
+
+
 #### Reloading
 
 If you need to reset fabrication back to its original state after it has been
