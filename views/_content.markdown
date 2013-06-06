@@ -89,13 +89,22 @@ one are available via a block parameter.
       email { |attrs| "#{attrs[:name].parameterize}@example.com" }
     end
 
-#### Reserved Words ####
+#### Keywords ####
+** Using keywords for field names is not a best practice! **
 
-You can reference fields whose names are reserved words with the block variable.
+You can reference fields whose names are reserved keywords (alias, class, def, if, while, ...) with the block variable.
+
+    class Person
+      attr_accessor :alias, :codename
+      alias aka codename
+    end
 
     Fabricator(:person) do |f|
       f.alias 'James Bond'
+      codename '007'
     end
+
+    Fabricate(:person).aka #=> '007'
 
 #### Associations
 
