@@ -316,6 +316,18 @@ will be a regular Ruby `Hash`.
 
     Fabricate.attributes_for(:company)
 
+#### Multiple Objects
+
+You can create an array of objects by using the `times` method. It takes an
+integer as the first argument and the rest has all the same goodness as the
+standard `Fabricate` method.
+
+    Fabricate.times(4, :company, name: 'Hashrocket') do
+      type 'consultancy'
+    end
+
+    #=> an array with 4 company objects
+
 ### Sequences
 
 A sequence allows you to get a series of numbers unique within the current
