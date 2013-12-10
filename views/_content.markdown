@@ -304,7 +304,7 @@ For example, calling build on `person` will cascade down to `Fabricate(:car)`
 and they will not be persisted either.
 
     Fabricate.build(:person) do
-      cars { 2.times { Fabricate(:car) } }
+      cars { 2.times.map { Fabricate(:car) } }
     end
 
 #### Attributes Hash
