@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
 
 gem 'middleman'
-gem 'rdiscount'
+gem 'middleman-syntax'
+gem 'redcarpet'
