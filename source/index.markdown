@@ -50,6 +50,18 @@ Allows you to specify the default starting number for all sequences. This can st
 
 Default: `0`
 
+#### Pre-loading Fabricators
+
+Fabrication doesn't load the defined fabricators until the first time you actually try to fabricate something. Here is an example for pre-loading them in cucumber.
+
+```ruby
+Before do
+  Fabrication::Support.find_definitions
+end
+```
+
+NOTE: The vast majority of users do not need to do this and I do not recommend it. Certain uses and instances require it though.
+
 ### Defining Fabricators
 
 #### Arguments
