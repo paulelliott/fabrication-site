@@ -529,7 +529,7 @@ You can also scope them to a specific model with `only_for`.
 
 Email the fabrication [mailing list](https://groups.google.com/group/fabricationgem) if you need extra help or have specific questions.
 
-You can also view the [raw version of this documentation](https://github.com/paulelliott/fabrication-site/blob/master/views/_content.markdown).
+You can also view the [raw version of this documentation](https://github.com/paulelliott/fabrication-site/blob/master/index.markdown).
 
 If all else fails, open an [issue on GitHub](https://github.com/paulelliott/fabrication/issues).
 
