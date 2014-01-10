@@ -7,7 +7,7 @@
     %link(rel="apple-touch-icon-precomposed" href="/images/favicon-iphone.png")
     %link(rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/favicon-ipad.png")
     %link(rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/favicon-iphone4.png")
-    = stylesheet_link_tag 'application', media: "screen and (min-device-width: 1025px)"
+    = stylesheet_link_tag 'application', 'syntax', media: "screen and (min-device-width: 1025px)"
     = stylesheet_link_tag 'mobile', media: "screen and (max-device-width: 1024px)"
     /[if IE]
       = stylesheet_link_tag 'application'
@@ -58,7 +58,7 @@
             %li= link_to "DataMapper Resources", "http://datamapper.org"
             %li Any other classes
 
-        .main= yield
+        .main~ yield
     %footer#ventures
       %article
         %a(href="http://hashrocket.com")
