@@ -208,28 +208,29 @@ call.
 
 #### Callbacks
 
-You can specify callbacks in your Fabricator that are separate from the
-object's callbacks.
-
-To hook into Fabrication's build cycle for the object, you can use the following callbacks:
+Fabrication has its own callback cycle that is completely separate from the one
+provided by your ORM. You can use the following callbacks in your Fabricator
+definition.
 
 ```ruby
 after_build
-  before_validation
-  after_validation
-  before_save
-  before_create
-  after_create
-  after_save
+before_validation
+after_validation
+before_save
+before_create
+after_create
+after_save
 ```
 
-They happen right where you would expect them to. You can define them in your
-Fabricators as a block that optionally receives the object being fabricated and
-a hash of any transient attributes defined.
+IMPORTANT: The only callback executed when building an object is `after_build`.
+The rest are only executed when you create an object using the regular
+`Fabricate` call.
 
-As with anything that works in the Fabricator, you can also define them when
-you call Fabricate and they will work just like you'd expect. The callbacks are
-also stackable, meaning that you can declare multiple of the same type in a
+You can define them in your Fabricators as a block that optionally receives the
+object being fabricated and a hash of any transient attributes defined. As with
+anything that works in the Fabricator, you can also define them when you call
+Fabricate and they will work just like you'd expect. The callbacks are also
+stackable, meaning that you can declare multiple of the same type in a
 fabricator and they will not be clobbered when you inherit another fabricator.
 
 ```ruby
