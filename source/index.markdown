@@ -182,6 +182,17 @@ Fabricator(:person) do
 end
 ```
 
+Or for those times when you are trying to create random data with Fabrication...
+
+```ruby
+Fabricator(:person) do
+  open_source_projects(rand: 5)
+  children(rand: 3) { |attrs, i| Fabricate(:person, name: "Kid #{i}") }
+end
+```
+
+The `rand` parameter allows the count to be randomized from 1 to the amount provided.
+
 #### Inheritance
 
 You can inherit attributes from other fabricators by using the `:from` attribute.
