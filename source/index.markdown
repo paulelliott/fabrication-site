@@ -404,6 +404,17 @@ will be a regular Ruby `Hash`.
 Fabricate.attributes_for(:company)
 ```
 
+If the class you are getting the attributers for has a polymorphic
+`belongs_to`, you will need to add the type field to the fabricator definition
+if you want it in the generated parameters.
+
+```ruby
+Fabricator(:comment) do
+  commentable(fabricator: :post)
+  commentable_type { |attrs| attrs[:commentable].class.to_s }
+end
+```
+
 #### Multiple Objects
 
 You can create an array of objects by using the `times` method. It takes an
