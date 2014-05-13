@@ -1,26 +1,79 @@
-### Installation
+### Getting Started
 
-Fabrication is tested against Ruby 1.9.3, 2.0.0 and Rubinius.
+Fabrication is tested against Ruby 1.9.3, 2.0.0 and Rubinius. Ruby 1.8
+compatibility ended with version 1.2.0.
 
-(version 1.2.0 is the last release with 1.8.x compatibility)
+#### Installation
 
 To use it with Bundler, just add it to your gemfile.
 
+`gem 'fabrication'`
+
+#### Defining Fabricators
+
+You can define a schematic for generating objects by defining Fabricators as `spec/fabricators/**/*fabricator.rb`.
+
+They are loaded automatically so as long as they are in the right place you are good to go.
+
+So let's say you have a `Person` model with the usual fields and some associations:
+
 ```ruby
-gem 'fabrication'
+class Person < ActiveRecord::Base
+  belongs_to :neighborhood
+  has_many :houses
+end
 ```
 
-Fabricators defined in the right place are automatically loaded so no
-additional requires are necessary.
+You could then create a `Fabricator` to automaticaly generate copies of it for your test suite.
 
+```ruby
+# located in spec/fabricators/person_fabricator.rb
+Fabricator(:person) do
+  neighborhood
+  houses(count: 2)
+  name { Faker::Name.name }
+  age 45
+  gender { %w(M F).sample }
+end
 ```
-spec/fabricators/**/*fabricator.rb
-test/fabricators/**/*fabricator.rb
+
+Every time you fabricate a person, you will get a brand new instance of a
+person model persisted to the database and containing the fields you specified.
+In the case above, `neighborhood` and `houses` would automatically expand out
+to use the fabricators for those models and be persisted as well.
+
+You can learn more on the Defining Fabricators tab.
+
+#### Fabricating Instances
+
+Once you have defined your fabricators, you can use them anywhere in your
+application. This is especially useful in populate scripts for development and
+staging environments as well as in your test suite.
+
+You can Fabricate a new instance of the person object we defined above every time you call:
+
+`Fabricate(:person)`
+
+You can also provide overrides to the default options at `Fabricate` time with
+a hash or the same block syntax you used to define the Fabricator.
+
+```ruby
+Fabricate(:person, name: 'Paul Elliott', gender: 'M') do
+  houses { [Fabricate(:house, location: 'the beach')] }
+end
 ```
+
+You can learn more about the options at Fabricate time on the Fabricating Objects tab.
+
+#### Getting Help
+
+Email the fabrication [mailing list](https://groups.google.com/group/fabricationgem) if you need extra help or have specific questions. I'll answer you as quick as I can.
+
+If all else fails, open an [issue on GitHub](https://github.com/paulelliott/fabrication/issues) and I'll take a look!
 
 ### Configuration
 
-To override these settings, put a fabrication.rb in your support folder with a configure block
+To override these settings, put a `fabrication.rb` in your support folder with a configure block
 
 ```ruby
 Fabrication.configure do |config|
