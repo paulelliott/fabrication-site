@@ -1,9 +1,9 @@
 ### Getting Started
 
-Fabrication is tested against Ruby 1.9.3, 2.0.0 and Rubinius. Ruby 1.8
-compatibility ended with version 1.2.0.
-
 #### Installation
+
+Fabrication is tested against Ruby 1.9.3, 2.0.0 and Rubinius (Ruby 1.8
+compatibility ended with version 1.2.0).
 
 To use it with Bundler, just add it to your gemfile.
 
@@ -13,7 +13,7 @@ To use it with Bundler, just add it to your gemfile.
 
 You can define a schematic for generating objects by defining Fabricators as `spec/fabricators/**/*fabricator.rb`.
 
-They are loaded automatically so as long as they are in the right place you are good to go.
+Fabricators are loaded automatically - so as long as they're in the right place, you're good to go.
 
 So let's say you have a `Person` model with the usual fields and some associations:
 
@@ -24,10 +24,11 @@ class Person < ActiveRecord::Base
 end
 ```
 
-You could then create a `Fabricator` to automaticaly generate copies of it for your test suite.
+You could then create a `Fabricator` to automaticaly generate copies of `Person` for your test suite.
 
 ```ruby
 # located in spec/fabricators/person_fabricator.rb
+
 Fabricator(:person) do
   neighborhood
   houses(count: 2)
@@ -37,18 +38,18 @@ Fabricator(:person) do
 end
 ```
 
-Every time you fabricate a person, you will get a brand new instance of a
+Every time you fabricate a person, you'll get a brand-new instance of a
 person model persisted to the database and containing the fields you specified.
 In the case above, `neighborhood` and `houses` would automatically expand out
-to use the fabricators for those models and be persisted as well.
+to use the fabricators for those models, and be persisted as well.
 
 You can learn more on the Defining Fabricators tab.
 
 #### Fabricating Instances
 
-Once you have defined your fabricators, you can use them anywhere in your
+Once you've defined some fabricators, you can use them anywhere in your
 application. This is especially useful in populate scripts for development and
-staging environments as well as in your test suite.
+staging environments, as well as in your test suite.
 
 You can Fabricate a new instance of the person object we defined above every time you call:
 
@@ -63,7 +64,7 @@ Fabricate(:person, name: 'Paul Elliott', gender: 'M') do
 end
 ```
 
-You can learn more about the options at Fabricate time on the Fabricating Objects tab.
+You can learn more about the options available at `Fabricate` time on the Fabricating Objects tab.
 
 #### Getting Help
 
