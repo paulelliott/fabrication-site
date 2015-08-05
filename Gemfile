@@ -5,4 +5,8 @@ ruby '2.2.2'
 
 gem 'middleman'
 gem 'middleman-syntax'
+gem "middleman-autoprefixer"
+gem "middleman-livereload", "~> 3.1.0"
+
 gem 'redcarpet'
+gem "bourbon"
