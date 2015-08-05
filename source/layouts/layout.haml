@@ -1,4 +1,4 @@
-!!! 5
+!!!
 %html
   %head
     %meta(charset="UTF-8")
@@ -7,40 +7,39 @@
     %link(rel="apple-touch-icon-precomposed" href="/images/favicon-iphone.png")
     %link(rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/favicon-ipad.png")
     %link(rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/favicon-iphone4.png")
-    = stylesheet_link_tag 'application', 'syntax', media: "screen and (min-device-width: 1025px)"
+    %link(href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css')
+    %link(href='http://fonts.googleapis.com/css?family=Palanquin' rel='stylesheet' type='text/css')
+    = stylesheet_link_tag 'application'
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"
     = javascript_include_tag 'application'
     /[if IE]
       = javascript_include_tag 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
     = javascript_include_tag 'http://use.typekit.com/vkq5xzv.js'
-    %meta(name="viewport" content="width=device-width, user-scalable=no")
+    %meta(name="viewport" content="width=device-width")
 
   %body
     = partial 'gem'
-    %hgroup
-      %h1 Fabrication
-      %h2 object generation for Ruby
+    %header#site_head
+      %h1.drawing Fabrication
     .opening
       %p Fabrication is a simple and powerful object generation library. Just define Fabricators -- the schematics for your objects -- and quickly Fabricate objects as needed anywhere in your app or specs.
 
       %p Fabrication can generate anything but has specific support for:
 
+    %nav#site_nav
+      = link_to "Navigation", "#", class: "nav_toggle"
       %ul
-        %li= link_to "ActiveRecord Models", "http://guides.rubyonrails.org/active_record_querying.html"
-        %li= link_to "Mongoid Documents", "http://mongoid.org"
-        %li= link_to "Sequel Models", "http://sequel.rubyforge.org"
-        %li= link_to "DataMapper Resources", "http://datamapper.org"
 
-    .main~ yield
-    %footer#ventures
-      %article
-        %a(href="http://hashrocket.com")
-          %img(src="/images/ventures_logo.png")
-          %h1 This project is powered by Hashrocket
-          %p Hashrocket is a premiere Ruby on Rails design &amp; development consultancy.
-          %p
-            Learn more about us at
-            %span Hashrocket.com
+    %main~ yield
+    -# %footer#ventures
+    -#   %article
+    -#     %a(href="http://hashrocket.com")
+    -#       %img(src="/images/ventures_logo.png")
+    -#       %h1 This project is powered by Hashrocket
+    -#       %p Hashrocket is a premiere Ruby on Rails design &amp; development consultancy.
+    -#       %p
+    -#         Learn more about us at
+    -#         %span Hashrocket.com
 
     :javascript
       var _gaq = _gaq || [];

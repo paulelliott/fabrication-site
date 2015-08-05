@@ -1,5 +1,37 @@
 @import 'reset'
 
+// cask.sass
+// additional mixins for use along with Bourbon
+
+$site-width-max: 1400px !default
+$site-width-mid: 800px !default
+$site-width-narrow: 480px !default
+
+= min-width($width)
+  @media screen and (min-width: #{$width})
+    @content
+
+= max-width($width)
+  @media screen and (max-width: #{$width})
+    @content
+
+= tablet
+  +max-width($site-width-mid)
+    @content
+
+= mobile
+  +max-width($site-width-narrow)
+    @content
+
+= responsive($attr, $full, $mid:false, $narrow:false)
+  #{$attr}: #{$full}
+  @if $mid
+    +max-width($site-width-mid)
+      #{$attr}: #{$mid}
+  @if $narrow
+    +max-width($site-width-narrow)
+      #{$attr}: #{$narrow}
+
 @keyframes pulse
   0%
     opacity: 1
@@ -12,19 +44,128 @@
   100%
     opacity: 1
 
-hgroup, .main, footer
-  display: none
+html
+  font-size: 62.5%
 
+body
+  background: #282828
+  font-size: 1.4em
+  color: #ccc
+  font-family: Palanquin, sans-serif
+  -webkit-font-smoothing: antialiased
+
+a
+  color: #ccc
+
+header#site_head,
 #gem
-  background: #aaa
-  width: 100%
   height: 20vw
   max-height: 20rem
+  min-height: 10rem
+
+header#site_head
+  position: relative
+  z-index: 2
+  display: flex
+  align-items: center
+  h1
+    -webkit-font-smoothing: subpixel-antialiased
+    flex: 1
+    font-size: 6vw
+    font-family: Megrim, sans-serif
+    text-align: center
+    text-transform: uppercase
+    letter-spacing: 5vw
+    opacity: .4
+    line-height: 1
+    color: #fff
+    opacity: .5
+    text-indent: 5vw
+    text-shadow: 0
+    transition: text-shadow 3s, color 3s, opacity 3s
+    &.drawing
+      color: rgba(255,255,255,0)
+      text-shadow: 0 0 50px #fff
+      opacity: 0.01
+
+nav#site_nav
+  position: relative
+  text-align: center
+  text-transform: uppercase
+  letter-spacing: .1vw
+  font-size: 1.2rem
+  background: #333
+  max-width: 20rem
+  margin: 0 auto
+  ul
+    background: #333
+    position: absolute
+    top: 100%
+    left: 0
+    right: 0
+    margin: 0 auto
+    max-height: 0
+    transition: max-height .2s
+    overflow: hidden
+    li
+      flex: 1
+  a
+    font-weight: bold
+    display: block
+    padding: .3vw
+    transition: color .1s
+    color: #aaa
+    &.nav_toggle
+      font-weight: bold
+      max-height: none
+      background: none
+    &:hover
+      color: #fff
+  &.open
+    ul
+      max-height: 30rem
+  +mobile
+    position: fixed
+    bottom: 0
+    right: 0
+    left: 0
+    font-size: 4vw
+    max-width: none
+    ul
+      top: auto
+      bottom: 100%
+
+main
+  margin: 0 auto
+  max-width: 100rem
+  h3
+    display: none
+    ~ *
+      display: none
+    &.active
+      display: block
+      ~ *
+        display: block
+        ~ h3:not(.active)
+          display: none
+          ~ *
+            display: none
+  pre
+    max-width: 100%
+    overflow-x: auto
+
+#gem
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  z-index: 1
   .hole
-    background: #999
-    fill: #333
+    fill: #202020
+  .hole_shadow
+    fill: #000
   .door
-    fill: #bbb
+    fill: #2e2e2e
   .panel_l
     fill: #fff
     opacity: .4
@@ -34,14 +175,19 @@ hgroup, .main, footer
   .outline,
   .inner
     fill: none
-    stroke-width: 2px
-  .inner
-    // stroke: #fff
-    // mix-blend-mode: color-dodge
+    stroke-width: 3px
+    +mobile
+      stroke-width: 4px
   .laser
-    stroke: red
-    stroke-width: 1px
+    stroke: #ff6644
+    stroke-width: 3px
+    opacity: .6
+    +mobile
+      stroke-width: 6px
   .zap
     stroke: none
     transform: translateZ(0)
-    animation: .1s pulse infinite
+    animation: .3s pulse infinite
+  .hidden
+    visibility: hidden
+    animation: none
