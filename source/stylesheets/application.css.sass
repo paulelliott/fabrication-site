@@ -1,225 +1,47 @@
 @import 'reset'
-@import 'mixins'
-@import 'ventures'
 
-body
-  background: #cdd6d4 url("/images/bg.png") bottom left repeat-x
-  font-family: "camingodos-web-1", "camingodos-web-2", helvetica, arial, sans-serif
-  min-height: 400px
-  color: #4c504e
+@keyframes pulse
+  0%
+    opacity: 1
+  20%
+    opacity: .4
+  50%
+    opacity: .8
+  80%
+    opacity: 0
+  100%
+    opacity: 1
 
-html
-  &.wf-loading
-    #content
-      hgroup, .main, nav
-        +opacity(0)
-  &.wf-active
-    #content
-      hgroup
-        padding-top: 0
-        h1
-          font-size: 60px
-        h2
-          font-size: 40px
-      nav
-        ul
-          li
-            font-size: 22px
+hgroup, .main, footer
+  display: none
 
-#wrapper
-  position: relative
-  min-width: 880px
-
-#content
-  position: relative
-  padding: 240px 0 340px 0
-  z-index: 2
-  code
-    margin: 0 3px
-    color: #2d2f2e
-    background: #e4eae9
-    padding: 0 3px
-  a
-    color: #964433
-    text-decoration: none
-    &:hover
-      text-decoration: underline
-  hgroup
-    padding: 40px 400px 0 20px
-    color: #fff
-    text-shadow: 0 1px 1px #9aa09f
-    font-family: "atrament-web-1", "atrament-web-2", helvetica, arial, sans-serif
-    margin: 0 0 30px 0
-    h1
-      font-size: 40px
-      text-transform: uppercase
-      line-height: 100%
-    h2
-      font-size: 30px
-      line-height: 100%
-  .opening
-    padding: 0 420px 0 20px
-    ul, p
-      font-size: 14px
-      line-height: 22px
-      margin: 0 0 20px 0
-    ul
-      list-style-type: square
-      padding-left: 60px
-  nav
-    ul
-      overflow: hidden
-      padding-left: 20px
-      li
-        border-bottom: 1px solid #cdd6d4
-        position: relative
-        cursor: pointer
-        font-size: 13px
-        background: #f5faf6
-        font-family: "atrament-web-1", "atrament-web-2", helvetica, arial, sans-serif
-        float: left
-        border-right: 1px solid #cdd6d4
-        padding: 3px 8px
-        color: #828785
-        &:first-of-type
-          border-left: 1px solid #cdd6d4
-        &.selected, &:hover
-          background: #fffffa
-          color: #4c504e
-        &.selected
-          border-bottom: 1px solid #fffffa
-  .main
-    clear: both
-    padding: 20px
-    background: #fffffa
-    border-bottom: 2px solid #828785
-    p, ul, ol
-      font-size: 13px
-      line-height: 20px
-      margin: 0 0 20px 0
-    ul
-      list-style-type: square
-      padding-left: 40px
-    ol
-      list-style-type: decimal
-      padding-left: 40px
-    h4
-      font-size: 36px
-      color: #4c504e
-      font-weight: 500
-      font-family: "atrament-web-1", "atrament-web-2", helvetica, arial, sans-serif
-      margin: 0 0 20px 0
-      padding: 20px 0 0 0
-    h5
-      font-weight: bold
-      margin: 0 0 20px 0
-    pre
-      background: #e4eae9
-      padding: 20px
-      margin: 0 0 20px 0
-      overflow: auto
-      line-height: 140%
-      code
-        margin: 0
-        padding: 0
-
-#conveyor
-  position: absolute
-  right: 0
-  top: 0
-  height: 100%
+#gem
+  background: #aaa
   width: 100%
-  overflow: hidden
-  #cutout
-    position: absolute
-    background: url("/images/conveyor_panel.png")
-  #items
-    position: absolute
-    top: 0
-    right: 0
-    width: 100%
-    height: 640px
-    overflow: hidden
-    > div
-      position: absolute
-      background: url("/images/conveyor_bg.png") 0 0
-      width: 800px
-      height: 400px
-      &.punched
-        background-position: 0 -400px
-      &.filled
-        background-position: 0 -800px
-      > div
-        position: absolute
-        left: 50px
-        bottom: 34px
-        width: 161px
-        height: 97px
-        background: url("/images/conveyor_panel.png") 0 -97px no-repeat
-  #puncher
-    position: absolute
-    right: 648px
-    top: -100px
-    width: 165px
-    height: 163px
-    background: url("/images/conveyor_puncher.png") 0 100% no-repeat
-  #placer
-    background: url("/images/conveyor_placer.png") 0 100% no-repeat
-    position: absolute
-    right: 379px
-    top: 0px
-    width: 179px
-    height: 195px
-    div
-      background: url("/images/conveyor_leds.png") 0 0 no-repeat
-      position: absolute
-      left: 112px
-      top: 105px
-      width: 0
-      height: 14px
-  #cutout,
-  #panel
-    position: absolute
-    width: 161px
-    height: 97px
-    background: url("/images/conveyor_panel.png") 0 -97px no-repeat
-  #cutout
-    top: 100px
-    right: 644px
-    display: none
-    background-position: top left
-  #panel
-    top: 94px
-    right: 386px
-  #glow
-    background: url("/images/conveyor_glow.png")
-    position: absolute
-    +opacity(0)
-    width: 171px
-    height: 157px
-    right: 382px
-    top: 143px
-#catcher_back
-  position: absolute
-  height: 108px
-  width: 281px
-  right: 584px
-  bottom: 195px
-  background: url("/images/conveyor_catcher.png") 0 -112px
-#catcher
-  position: absolute
-  height: 250px
-  width: 281px
-  right: 584px
-  bottom: 0
-  background: url("/images/conveyor_catcher.png") bottom left
-  div
-    display: none
-    height: 102px
-    background: url("/images/conveyor_catcher.png")
-    width: 100%
-    position: absolute
-    left: 0
-    top: -47px
-
-@import "ventures"
+  height: 20vw
+  max-height: 20rem
+  .hole
+    background: #999
+    fill: #333
+  .door
+    fill: #bbb
+  .panel_l
+    fill: #fff
+    opacity: .4
+  .panel_r
+    fill: #000
+    opacity: .4
+  .outline,
+  .inner
+    fill: none
+    stroke-width: 2px
+  .inner
+    // stroke: #fff
+    // mix-blend-mode: color-dodge
+  .laser
+    stroke: red
+    stroke-width: 1px
+  .zap
+    stroke: none
+    transform: translateZ(0)
+    animation: .1s pulse infinite

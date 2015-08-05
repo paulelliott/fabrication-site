@@ -4,182 +4,188 @@
   for Hashrocket Ventures http://hashrocket.com
 */
 
+//= include snap.svg
+//= include randomColor
+
 $(function() {
 
-  if (!(/^Win/.test(window.navigator.platform))) {
-    try { Typekit.load(); }
-    catch (e) {}
-  }
+  var gem = Snap.select("#gem");
+  var duration = 1000;
 
-  $.fn.addID = function() {
-    return $(this).each(function() {
-      $(this).attr("id", $(this).text().toLowerCase().replace(" ", "-"));
-    });
+  var points = {
+    topright: "356 129.8",
+    topleft: "235.9 60.5",
+    left: "169 57.3",
+    bottom: "155 176.5",
+    right: "361.5 168.4",
+    t1: "333.7 116.9",
+    t2: "309.2 102.7",
+    t3: "258.3 73.4",
+    t4: "282.8 87.5",
+    b1: "325.7 147.7",
+    b2: "286.4 125",
+    b3: "204.9 78",
+    b4: "244.1 100.6"
   };
 
-  var $main = $(".main");
+  var pointOrder = "topleft topright right bottom left topleft t1 b1 bottom b2 t2 t3 b3 bottom b4 t4 topright right left";
 
-  if ($("#conveyor").is(":visible")) {
-    buildExternalNav();
-  } else {
-    $("#wrapper").prepend($("<img/>", {src: "/images/bg_mobile.png"}));
-    collapseContent();
-  }
+  var hole = gem.path(
+    "M 230.4 315.4 L 4 184.7 L 230.4 54 L 456.7 184.7 Z"
+  ).attr({ class: "hole", transform: "s1.3 t0 10" });
 
-  if (window.location.hash) {
-    jQuery.fx.off = true;
-    $(window.location.hash.replace("!", "")).trigger("click");
-    jQuery.fx.off = false;
-  }
+  var door_container = gem.g();
 
-  function collapseContent() {
-    var $h3s = $main.find("h3").addID();
-    var $content = $main.children().not("h3");
-    $content.hide();
-    $h3s.click(function() {
-      var $new = $(this).nextUntil("h3");
-      $content.not($new).hide();
-      $new.toggle();
-      window.scrollTo(0, $(this).offset().top);
-      window.location.hash = $(this).attr("id");
+  var door_cutout = gem.path(
+    "M 230.4 315.4 L 4 184.7 L 230.4 54 L 456.7 184.7 Z"
+  ).attr({ fill: "white", transform: "s1.3 t0 10" });
+
+  var door = gem.rect(-70, 0, 600, 400).attr({
+    class: "door"
+  });
+
+  var panel_group = gem.g();
+  var panel_container = gem.g();
+
+  var cutout = gem.path(
+    "M 230.4 315.4 L 4 184.7 L 4 0 L 456.7 0 L 456.7 184.7 Z"
+  ).attr({ fill: "white", transform: "s1.3 t0 10" });
+
+  var panel = gem.path(
+    "M 230.4 275.4 L 4 144.7 L 4 134.7 L 230.4 4 L 456.7 134.7 L 456.7 144.7 Z"
+  )
+
+  var panel_l = gem.path(
+    "M 230.4 265.4 L 4 134.7 L 4 144.7 L 230.4 275.4 Z"
+  ).attr({ "class": "panel_l" })
+
+  var panel_r = gem.path(
+    "M 230.4 265.4 L 456.7 134.7 L 456.7 144.7 L 230.4 275.4 Z"
+  ).attr({ "class": "panel_r" })
+
+  var laser = gem.path(
+    "M 235.9 0 L " + points.topleft + " Z"
+  ).attr({
+    "transform": "t0 50",
+    "class": "laser"
+  });
+
+  var zap = gem.circle(0, 0, 5).attr({
+    "class": "zap",
+    "transform": "t0 50",
+    fill: gem.gradient("r(0.5, 0.5, 0.5)white-yellow:20-rgba(255,0,0,.7):40-rgba(255,0,0,0)")
+  });
+
+  var outline = gem.path(buildFromPoints(pointOrder));
+  var inner = gem.path(buildFromPoints(pointOrder)).transform("t0 2");
+
+  var outline_length = outline.getTotalLength();
+
+  outline.attr({
+    "class": "outline",
+    "stroke-dasharray": outline_length + " " + outline_length
+  });
+
+  inner.attr({
+    "class": "inner",
+    "stroke-dasharray": outline_length + " " + outline_length
+  });
+
+  panel_group.add(panel, panel_l, panel_r, outline, inner)
+    .attr({
+      visibility: "hidden"
+    });
+
+  door_container.add(door).attr({ mask: door_cutout });
+  panel_container.add(panel_group).attr({ mask: cutout });
+
+  var drawing = false;
+  gem.click(leave);
+
+  reset();
+  draw();
+
+  function leave() {
+    if (drawing) { return; }
+    door.animate({ transform: 't-900 0' }, 400, mina.easout, function() {
+      panel_group
+        .animate({ transform: 't0 800' }, 400, mina.easeout, draw);
     });
   }
 
-  function buildExternalNav() {
-    $main.detach();
-    var $nav = $("<nav />");
-    var $ul = $("<ul />").appendTo($nav);
-    var $article;
-    $main.children().detach().each(function() {
-      var $el = $(this);
-      if ($el[0].nodeName === "H3") {
-        $("<li />").text($el.detach().text()).appendTo($ul).addID();
-        $article = $("<article />").appendTo($main);
-      } else {
-        $el.appendTo($article);
-      }
-    });
-
-    $nav.insertAfter($(".opening"));
-    $main.insertAfter($nav);
-    $main.find("article").hide().first().show();
-
-    $nav.find("li").click(function() {
-
-      var $li = $(this);
-      var $a = $main.find("article");
-      var $new = $a.eq($li.addClass("selected").index());
-
-      if ($new.is(":hidden")) {
-        window.location.hash = "!" + $(this).attr("id");
-        $nav.find("li").not($li).removeClass();
-        $main.css("height", $main.height());
-
-        $a.filter(":visible").fadeOut(200, function() {
-          $main.animate({
-            height: $new.height()
-          }, 200, function() {
-            $new.fadeIn(200);
-            $("#cutout").is(":animated") ? false : $("#cutout").hide();
-          });
-        });
-      }
-
-      return false;
-    }).filter(":first").click();
+  function wipe() {
+    outline.attr({ "stroke-dashoffset": outline_length });
+    inner.attr({ "stroke-dashoffset": outline_length });
   }
 
-  (function($conveyor) {
+  function reset() {
+    hide(laser);
+    hide(zap);
+    drawing = false;
+  }
 
-    var $row = $("#items");
-    var $items = $row.children();
-    var $puncher = $("#puncher");
-    var $panel = $("#panel");
-    var $cutout = $("#cutout");
-    var $glow = $("#glow");
-    var $fire = $("#catcher div");
-    var $leds = $("#placer div");
+  function draw() {
+    drawing = true;
+    wipe();
+    recolor();
+    door.animate({ transform: 't0 0' }, 400, mina.easout, function() {
+      panel_group.transform("t0 -200");
+      panel_group
+        .attr({ visibility: "visible" })
+        .animate({ transform: 't0 50' }, 1000, mina.bounce, etch)
+    });
+  }
 
-    if($conveyor.is(":visible")) {
-      walk();
-    };
+  function etch() {
 
-    var waiting = false;
+    show(laser);
+    show(zap);
 
-    function walk() {
-      $conveyor.stop(true, false);
-      var elementsAreVisible = function() {
-        var st = $(window).scrollTop();
-        return (st < $("#placer").height() || st + $(window).height() > $("#catcher_back").offset().top);
-      };
-      if(elementsAreVisible()) {
-        clearInterval(waiting);
-        waiting = false;
-        populate();
-        $leds.css("width", "0").delay(300)
-          .animate({ width: 6 }, 0).delay(300)
-          .animate({ width: 14 }, 0).delay(300)
-          .animate({ width: 22 }, 0);
-        $items.animate({
-          right: "-=132px",
-          bottom: "-=76px"
-        }, 200, function(e) {
-            if ($conveyor.find(":animated").length == 1) {
-              placePanel();
-              punchPanel();
-            }
-        });
-      } else {
-        $cutout.hide();
-        if (!waiting) {
-          waiting = setInterval(walk, 1000);
-        }
-      }
-    };
+    Snap.animate(0, outline_length, function(val) {
+      var p = outline.getPointAtLength(val);
 
-    function populate() {
-      var $original = $items.css({
-        right: 590,
-        bottom: 760
+      zap.attr({
+        cx: p.x,
+        cy: p.y
       });
-      $items.removeClass().each(function(i) {
-        var $c = $(this);
-        if ($c.index() > 0) {
-          $c.css({
-            "right": 590 - 132 * i + "px",
-            "bottom": 760 - 76 * i + "px"
-          });
-        }
-        if (i > 5) {
-          $c.addClass("filled");
-        } else if (i > 3) {
-          $c.addClass("punched");
-        }
-      });
-    }
 
-    function placePanel() {
-      $glow.delay(600).animate({opacity: 0.3}, 600, function() {
-        $panel.animate({ top: 206 }, 100, function() {
-          $panel.css({ top: 94 });
-          $row.find(":eq(5)").addClass("filled");
-          $glow.animate({opacity: 0}, 400, walk);
-        });
+      laser.attr({
+        d: "M " + p.x + " -50 L " + p.x + " " + p.y + " Z"
       });
-    }
 
-    function punchPanel() {
-      $puncher.animate({ top: -60 }, 400, function() {
-        $cutout.css("top", 80);
-        $puncher.animate({ top: 0 }, 50, function() {
-            $row.animate({ paddingTop: 10 }, 50).animate({ paddingTop: 0 }, 50);
-            $row.find(":eq(3)").addClass("punched");
-            $cutout.show().animate({ top: $(document).height() }, 1200);
-            $fire.delay(800).fadeIn(50).fadeOut(800);
-            $puncher.delay(50).animate({ top: -100 }, 200);
-        });
+      inner.attr({
+        "stroke-dashoffset": outline_length - val
       });
-    }
-  })($("#conveyor"));
+
+      outline.attr({
+        "stroke-dashoffset": outline_length - val
+      });
+
+    }, duration, reset);
+  }
+
+  function buildFromPoints(str) {
+    return "M " + str.split(" ").map(function(p) { return points[p] }).join(" L ") + " Z";
+  }
+
+  function recolor() {
+    var c = Snap.color(randomColor({luminosity: 'light'})),
+        outline_color = Snap.hsl(c.h, c.s, c.l * 0.8)
+        lighter_l = c.l * 1.2,
+        inner_color = Snap.hsl(c.h, c.s, lighter_l > 1 ? 1 : lighter_l )
+
+    panel.attr({ fill: c.hex });
+
+    outline.attr({ stroke: outline_color });
+    inner.attr({ stroke: inner_color });
+  }
+
+  function show(el) {
+    el.attr({ visibility: 'visible' });
+  }
+
+  function hide(el) {
+    el.attr({ visibility: 'hidden' });
+  }
 
 });

@@ -8,9 +8,6 @@
     %link(rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/favicon-ipad.png")
     %link(rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/favicon-iphone4.png")
     = stylesheet_link_tag 'application', 'syntax', media: "screen and (min-device-width: 1025px)"
-    = stylesheet_link_tag 'mobile', media: "screen and (max-device-width: 1024px)"
-    /[if IE]
-      = stylesheet_link_tag 'application'
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"
     = javascript_include_tag 'application'
     /[if IE]
@@ -19,45 +16,22 @@
     %meta(name="viewport" content="width=device-width, user-scalable=no")
 
   %body
-    #wrapper
-      #catcher_back
-      #conveyor
-        #cutout
-        #items
-          %div
-          %div
-          %div
-          %div
-          %div
-          %div
-          %div
-          %div
-          %div
-          %div
-          %div
-        #panel
-        #puncher
-        #glow
-        #placer
-          %div
-      #catcher
-        %div
-      %section#content
-        %hgroup
-          %h1 Fabrication
-          %h2 object generation for Ruby
-        .opening
-          %p Fabrication is a simple and powerful object generation library. Just define Fabricators -- the schematics for your objects -- and quickly Fabricate objects as needed anywhere in your app or specs.
+    = partial 'gem'
+    %hgroup
+      %h1 Fabrication
+      %h2 object generation for Ruby
+    .opening
+      %p Fabrication is a simple and powerful object generation library. Just define Fabricators -- the schematics for your objects -- and quickly Fabricate objects as needed anywhere in your app or specs.
 
-          %p Fabrication can generate anything but has specific support for:
+      %p Fabrication can generate anything but has specific support for:
 
-          %ul
-            %li= link_to "ActiveRecord Models", "http://guides.rubyonrails.org/active_record_querying.html"
-            %li= link_to "Mongoid Documents", "http://mongoid.org"
-            %li= link_to "Sequel Models", "http://sequel.rubyforge.org"
-            %li= link_to "DataMapper Resources", "http://datamapper.org"
+      %ul
+        %li= link_to "ActiveRecord Models", "http://guides.rubyonrails.org/active_record_querying.html"
+        %li= link_to "Mongoid Documents", "http://mongoid.org"
+        %li= link_to "Sequel Models", "http://sequel.rubyforge.org"
+        %li= link_to "DataMapper Resources", "http://datamapper.org"
 
-        .main~ yield
+    .main~ yield
     %footer#ventures
       %article
         %a(href="http://hashrocket.com")
@@ -67,6 +41,7 @@
           %p
             Learn more about us at
             %span Hashrocket.com
+
     :javascript
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-4408103-7']);
