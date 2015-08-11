@@ -569,7 +569,7 @@ end
 
 ```ruby
 config.generators do |g|
-  g.test_framework      :mini_test, fixture_replacement: :fabrication
+  g.test_framework      :minitest, fixture_replacement: :fabrication
   g.fixture_replacement :fabrication, dir: "test/fabricators"
 end
 ```
