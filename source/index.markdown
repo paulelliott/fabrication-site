@@ -544,9 +544,9 @@ end
 # => <Person ssn: 111111113, email: "user2@example.com">
 ```
 
-### Rails 3
+### Rails
 
-You can configure Rails 3 to produce fabricators when you generate models by
+You can configure Rails to produce fabricators when you generate models by
 specifying it in your `config/application.rb`. Use this if you are using rspec:
 
 ```ruby
