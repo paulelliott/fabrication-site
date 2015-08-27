@@ -15,31 +15,26 @@
     /[if IE]
       = javascript_include_tag 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
     = javascript_include_tag 'http://use.typekit.com/vkq5xzv.js'
-    %meta(name="viewport" content="width=device-width")
+    %meta(name="viewport" content="width=device-width,initial-scale=1")
 
   %body
     = partial 'gem'
     %header#site_head
-      %h1.drawing Fabrication
-    .opening
-      %p Fabrication is a simple and powerful object generation library. Just define Fabricators -- the schematics for your objects -- and quickly Fabricate objects as needed anywhere in your app or specs.
-
-      %p Fabrication can generate anything but has specific support for:
+      .title
+        %h1.drawing Fabrication
+      %h2 simple and powerful object generation for Ruby
 
     %nav#site_nav
       = link_to "Navigation", "#", class: "nav_toggle"
       %ul
 
-    %main~ yield
-    -# %footer#ventures
-    -#   %article
-    -#     %a(href="http://hashrocket.com")
-    -#       %img(src="/images/ventures_logo.png")
-    -#       %h1 This project is powered by Hashrocket
-    -#       %p Hashrocket is a premiere Ruby on Rails design &amp; development consultancy.
-    -#       %p
-    -#         Learn more about us at
-    -#         %span Hashrocket.com
+    %main.copy
+      ~ yield
+    %footer#site_foot
+      :markdown
+        site design by [Cameron Daigle](http://camerondaigle.com) for [Hashrocket](http://hashrocket.com)
+
+        Love Fabrication? Be sure to check out Paul and Cameron's other awesome product: [Informant](http://www.informantapp.com), a usability monitoring service for Ruby on Rails.
 
     :javascript
       var _gaq = _gaq || [];

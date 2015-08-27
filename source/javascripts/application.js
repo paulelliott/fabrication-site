@@ -14,7 +14,7 @@ $(function() {
       var $li = $("<li />");
       $li.append(
         $("<a />")
-          .attr("href", "#")
+          .attr("href", "#" + $h3.text().toLowerCase().replace(/ /g, '-'))
           .text($h3.text())
           .data("heading", $h3)
       );
@@ -29,6 +29,9 @@ $(function() {
     navigate: function() {
       $("main h3").removeClass("active");
       $(this).data("heading").addClass("active");
+      $(this)
+        .closest('li').addClass("active")
+        .siblings().removeClass("active");
     },
     openNav: function(e) {
       nav.$el.addClass("open");
@@ -37,6 +40,14 @@ $(function() {
     closeNav: function() {
       nav.$el.removeClass("open");
     },
+    readURL: function() {
+      hash = window.location.hash.replace("#", "")
+      if (hash.length) {
+        this.$el.find("a[href='#" + hash + "']").click();
+      } else {
+        this.$el.find("li:first a").click();
+      }
+    },
     init: function() {
       this.buildNav();
 
@@ -44,6 +55,8 @@ $(function() {
       $(document.body).on("click", this.closeNav);
 
       this.$el.on("click", "li a", this.navigate);
+
+      this.readURL();
     }
   }
 
@@ -154,7 +167,6 @@ $(function() {
 
   function leave() {
     if (drawing) { return; }
-    $headertext.addClass("drawing");
     setTimeout(function() {
       panel_group_inner.animate({ transform: 'r40,0,100' }, 400, mina.easout);
     }, 100);

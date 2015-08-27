@@ -48,73 +48,105 @@ html
   font-size: 62.5%
 
 body
-  background: #282828
+  background: #222
   font-size: 1.4em
   color: #ccc
   font-family: Palanquin, sans-serif
   -webkit-font-smoothing: antialiased
+  -webkit-text-size-adjust: 100%
 
 a
   color: #ccc
 
-header#site_head,
+header#site_head .title,
 #gem
   height: 20vw
   max-height: 20rem
   min-height: 10rem
+  padding-top: 1rem
 
 header#site_head
-  position: relative
-  z-index: 2
-  display: flex
-  align-items: center
-  h1
-    -webkit-font-smoothing: subpixel-antialiased
-    flex: 1
-    font-size: 6vw
-    font-family: Megrim, sans-serif
+  border-bottom: 1px solid #333
+  h2
+    background: #181818
     text-align: center
-    text-transform: uppercase
-    letter-spacing: 5vw
-    opacity: .4
-    line-height: 1
+    padding: 1rem 0 2rem 0
+    letter-spacing: .2rem
+    font-size: 1.3rem
+    color: #666
+    +mobile
+      letter-spacing: 0
+      padding: 1rem 0 2rem 0
+      font-size: 1.1rem
+  .title
+    position: relative
+    z-index: 2
+    display: flex
+    align-items: center
+    h1
+      -webkit-font-smoothing: subpixel-antialiased
+      flex: 1
+      font-size: 6vw
+      font-family: Megrim, sans-serif
+      text-align: center
+      text-transform: uppercase
+      letter-spacing: 5vw
+      opacity: .4
+      line-height: 1
+      color: #fff
+      opacity: .5
+      text-indent: 5vw
+      text-shadow: 0
+      transition: text-shadow 3s, color 3s, opacity 3s
+      &.drawing
+        color: rgba(255,255,255,0)
+        text-shadow: 0 0 50px #fff
+        opacity: 0.01
+
+footer#site_foot
+  margin-top: 4vw
+  background: #181818
+  border-top: 1px solid #333
+  padding: 4rem 1rem
+  text-align: center
+  font-size: .9em
+  color: #aaa
+  a
     color: #fff
-    opacity: .5
-    text-indent: 5vw
-    text-shadow: 0
-    transition: text-shadow 3s, color 3s, opacity 3s
-    &.drawing
-      color: rgba(255,255,255,0)
-      text-shadow: 0 0 50px #fff
-      opacity: 0.01
 
 nav#site_nav
   position: relative
   text-align: center
   text-transform: uppercase
   letter-spacing: .1vw
-  font-size: 1.2rem
-  background: #333
+  background: #222
   max-width: 20rem
+  border: 1px solid #333
+  border-top: none
   margin: 0 auto
   ul
-    background: #333
+    background: #222
     position: absolute
+    border: 1px solid #333
+    border-top: none
     top: 100%
-    left: 0
-    right: 0
+    left: -1px
+    right: -1px
     margin: 0 auto
     max-height: 0
     transition: max-height .2s
     overflow: hidden
     li
       flex: 1
+      &.active a
+        color: #fff
   a
     font-weight: bold
     display: block
-    padding: .3vw
+    padding: .4rem 0 .6rem 0
     transition: color .1s
-    color: #aaa
+    color: #888
+    font-size: 1.2rem
     &.nav_toggle
       font-weight: bold
       max-height: none
@@ -129,15 +161,35 @@ nav#site_nav
     bottom: 0
     right: 0
     left: 0
-    font-size: 4vw
     max-width: none
+    border: none
     ul
       top: auto
       bottom: 100%
+      border: none
+      border-top: .1rem solid #444
+      font-size: 1.3rem
+
+main,
+  margin: 0 auto
+  max-width: 80rem
+  padding: 0 2vw
+
+.opening
+  background: #181818
+  padding: 2vw 0
+  text-align: center
+  line-height: 1.3
+  .opening_inner
+    margin: 0 auto
+    max-width: 60rem
+    font-size: .9em
+    p
+      margin-bottom: 1em
+      &:first-of-type
+        font-size: 1.5em
 
 main
-  margin: 0 auto
-  max-width: 100rem
   h3
     display: none
     ~ *
@@ -154,7 +206,45 @@ main
     max-width: 100%
     overflow-x: auto
 
+.copy
+  h1, h2, h3, ul, p, pre
+    margin: 1.3em 0
+  h3
+    font-size: 2em
+    text-align: center
+    text-transform: uppercase
+    letter-spacing: .3rem
+    margin: 4vw 0
+    line-height: 1.2
+    +mobile
+      font-size: 1.6em
+  h4
+    margin-top: 1.6em
+    font-size: 1.3em
+    border-bottom: .2em solid transparentize(#fff, .9)
+  p
+    padding: 0 2vw
+  pre
+    background: transparentize(#fff, .95)
+    padding: 2vw
+    margin-left: 2vw
+    margin-right: 2vw
+    font-size: 1.6rem
+  code
+    font-size: 1.6rem
+    background: transparentize(#fff, .95)
+    padding: .2rem .4rem
+    margin: 0 .2rem
+  ul, ol
+    padding: 0 4em
+    list-style-type: square
+    li + li
+      margin-top: .5em
+  ol
+    list-style-type: decimal
+
 #gem
+  background: #181818
   position: absolute
   top: 0
   left: 0
@@ -165,7 +255,7 @@ main
   .hole_shadow
     fill: #000
   .door
-    fill: #2e2e2e
+    fill: #222
   .panel_l
     fill: #fff
     opacity: .4

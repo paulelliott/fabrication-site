@@ -1,5 +1,16 @@
 ### Getting Started
 
+#### What is Fabrication?
+
+Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs.
+
+Fabrication can generate anything, but has specific support for
+[ActiveRecord Models](http://guides.rubyonrails.org/active_record_querying.html),
+[Mongoid Documents](http://mongoid.org"),
+[Sequel Models](http://sequel.rubyforge.org),
+and
+[DataMapper Resources](http://datamapper.org).
+
 #### Installation
 
 Fabrication is tested against Ruby 1.9.3, 2.0.0 and Rubinius (Ruby 1.8
