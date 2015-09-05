@@ -1,4 +1,6 @@
-activate :autoprefixer
+activate :autoprefixer do |config|
+  config.browsers = ['> 1%', 'last 2 versions']
+end
 
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
