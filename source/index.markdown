@@ -183,7 +183,7 @@ end
 
 #### Keywords
 
-** Using keywords for field names is not a best practice! **
+**Using keywords for field names is not a best practice!**
 
 You can reference fields whose names are reserved keywords (alias, class, def, if, while, ...) with the block variable.
 
@@ -310,9 +310,10 @@ after_create
 after_save
 ```
 
-IMPORTANT: The only callback executed when building an object is `after_build`.
+**IMPORTANT:** The only callback executed when building an object is `after_build`.
 The rest are only executed when you create an object using the regular
-`Fabricate` call.
+`Fabricate` call. However, when your Fabricator is automatically run via an association
+created for another Fabricator, it will only run the `after_build` callback.
 
 You can define them in your Fabricators as a block that optionally receives the
 object being fabricated and a hash of any transient attributes defined. As with
