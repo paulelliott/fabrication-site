@@ -558,17 +558,13 @@ end
 
 ### Rails
 
-You can configure Rails to produce fabricators when you generate models by
-specifying it in your `config/application.rb`. Use this if you are using rspec:
+If you are using rspec-rails and fabrication gem is present in the `:development` 
+Bundler group, fabricators will be generated automatically when you generate
+models.
 
-```ruby
-config.generators do |g|
-  g.test_framework      :rspec, fixture: true
-  g.fixture_replacement :fabrication
-end
-```
-
-... or this if you are using test/unit:
+To produce fabricators when you generate models with test-unit or minitest,
+you need to configure the `test_framework` and `fixture_replacement` options
+in your `config/application.rb`. Use this if you are using test-unit:
 
 ```ruby
 config.generators do |g|
@@ -595,7 +591,7 @@ rails generate model widget
 Will produce:
 
 ```ruby
-# spec/fabricators/widget_fabricator.rb
+# test/fabricators/widget_fabricator.rb
 
 Fabricator(:widget) do
 end
