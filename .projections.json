@@ -1,0 +1,21 @@
+{
+  "Gemfile": {
+    "command": "lib",
+    "alternate": "Gemfile.lock"
+  },
+  "config.rb": {
+    "command": "config"
+  },
+  "source/*.markdown": {
+    "command": "views"
+  },
+  "source/javascripts/*": {
+    "command": "javascripts"
+  },
+  "source/layouts/*": {
+    "command": "layouts"
+  },
+  "source/stylesheets/*": {
+    "command": "stylesheets"
+  }
+}
