@@ -77,6 +77,11 @@ GEM
       rack (>= 1.4.5, < 2.0)
       thor (>= 0.15.2, < 2.0)
       tilt (~> 1.4.1, < 2.0)
+    middleman-google-analytics (2.1.1)
+      activesupport (~> 4.1)
+      erubis
+      middleman-core (>= 3.4)
+      uglifier (>= 2.5, < 4.0)
     middleman-livereload (3.4.6)
       em-websocket (~> 0.5.1)
       middleman-core (>= 3.3)
@@ -142,6 +147,7 @@ PLATFORMS
 DEPENDENCIES
   middleman (~> 3.0)
   middleman-autoprefixer
+  middleman-google-analytics
   middleman-livereload
   middleman-syntax
   redcarpet

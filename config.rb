@@ -11,6 +11,10 @@ set :markdown, :fenced_code_blocks => true, :smartypants => true
 
 activate :syntax
 
+activate :google_analytics do |ga|
+  ga.tracking_id = 'UA-4408103-7'
+end
+
 configure :development do
   activate :livereload
 end
