@@ -249,6 +249,8 @@ end
 
 Or for those times when you are trying to create random data with Fabrication...
 
+* The `rand` parameter allows the count to be randomized from 1 to the amount provided.
+
 ```ruby
 Fabricator(:person) do
   open_source_projects(rand: 5)
@@ -256,7 +258,17 @@ Fabricator(:person) do
 end
 ```
 
-The `rand` parameter allows the count to be randomized from 1 to the amount provided.
+If you have associations set up between two models you may see an issue of circular object generation. You can fix this by telling fabrication what the inverse of this association is so it knows not to generate an extra object on the other side.
+
+```ruby
+Fabricator(:widget) do
+  wockets(count: 5, inverse_of: :widget)
+end
+
+Fabricator(:wocket) do
+  widget(inverse_of: :widget)
+end
+```
 
 #### Inheritance
 
