@@ -92,6 +92,7 @@ Fabrication.configure do |config|
   config.fabricator_path = 'data/fabricators'
   config.path_prefix = Rails.root
   config.sequence_start = 10000
+  config.generators << CustomGeneratorForORM
 end
 ```
 
@@ -115,6 +116,12 @@ Allows you to specify the default starting number for all sequences. This can st
 
 Default: `0`
 
+##### generators
+
+Allows you to specify custom generators for non officially supported ORMs.
+
+Default: `[]`
+
 #### Pre-loading Fabricators
 
 Fabrication doesn't load the defined fabricators until the first time you actually try to fabricate something. Here is an example for pre-loading them in cucumber.
@@ -126,6 +133,26 @@ end
 ```
 
 NOTE: The vast majority of users do not need to do this and I do not recommend it. Certain uses and instances require it though.
+
+#### Defining Custom Generators
+
+Fabrication has builtin support for most popular Ruby ORMs. If you want to implement your custom strategy for ActiveRecord or add support for a new ORM, you can add your own generator.
+
+```ruby
+class ImmutablePoroGenerator < Fabrication::Generator::Base
+  def self.supports?(klass)
+    # return true or false, if this generator can support `klass` or not
+  end
+
+  def build_instance
+    self._instance = _klass.new(_attributes)
+  end
+end
+
+Fabrication.configure do |config|
+  config.generators << ImmutablePoroGenerator
+end
+```
 
 ### Defining Fabricators
 
