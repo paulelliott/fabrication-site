@@ -181,6 +181,16 @@ Fabricator(:person) do
 end
 ```
 
+To assign a Hash value you must to do so inside a block. If you do not, `Fabricate` will treat is as the options argument to the fabricated attribute (where you would normally define a count, custom fabricator, etc).
+
+```ruby
+Fabricator(:person) do
+  settings do
+    { favorite_color: 'yellow', egg_preference: 'scrambled' }
+  end
+end
+```
+
 #### Keywords
 
 **Using keywords for field names is not a best practice!**
