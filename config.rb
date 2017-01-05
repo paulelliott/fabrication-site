@@ -17,6 +17,10 @@ activate :google_analytics do |ga|
   ga.tracking_id = 'UA-4408103-7'
 end
 
+activate :s3_sync do |s3_sync|
+  s3_sync.after_build = true
+end
+
 configure :development do
   activate :livereload
 end
