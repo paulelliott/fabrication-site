@@ -13,8 +13,7 @@ and
 
 #### Installation
 
-Fabrication is tested against Ruby 1.9.3, 2.0.0 and Rubinius (Ruby 1.8
-compatibility ended with version 1.2.0).
+Fabrication is tested against Ruby 2.2 and above.
 
 To use it with Bundler, just add it to your gemfile.
 
