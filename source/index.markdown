@@ -285,12 +285,13 @@ end
 
 Or for those times when you are trying to create random data with Fabrication...
 
-* The `rand` parameter allows the count to be randomized from 1 to the amount provided.
+* The `rand` parameter allows the count to be randomized. You can provide an integer and it will default to `1..x` or you can provide a range as the value.
 
 ```ruby
 Fabricator(:person) do
   open_source_projects(rand: 5)
   children(rand: 3) { |attrs, i| Fabricate(:person, name: "Kid #{i}") }
+  dogs(rand: 1..4)
 end
 ```
 
