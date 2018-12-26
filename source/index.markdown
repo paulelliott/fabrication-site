@@ -296,15 +296,47 @@ Fabricator(:person) do
 end
 ```
 
-If you have associations set up between two models you may see an issue of circular object generation. You can fix this by telling fabrication what the inverse of this association is so it knows not to generate an extra object on the other side.
+##### Handling Circular Relationships
+
+If you have associations set up bi-directionally between two models you may see an issue of circular object generation. Fabricators producing that situation would look something like the following.
 
 ```ruby
 Fabricator(:widget) do
-  wockets(count: 5, inverse_of: :widget)
+  wockets(count: 5)
 end
 
 Fabricator(:wocket) do
-  widget(inverse_of: :widget)
+  widget
+end
+```
+
+You have a couple of options for fixing this. One may be better than the other based on the usage situation.
+
+1) Use a "base" version of the fabricator for the association. It's basically a trimmed down version without the associations but it can still have all the local attributes.
+
+```ruby
+Fabricator(:widget) do
+  wockets(count: 5, fabricator: :wocket_base)
+end
+
+Fabricator(:wocket_base)
+
+Fabricator(:wocket, from: :wocket) do
+  widget
+end
+```
+
+2) Override the `belongs_to` generation. ActiveRecord will automatically set the `belongs_to` side of the relationship when you save the set when you leave it blank.
+
+```ruby
+Fabricator(:widget) do
+  wockets(count: 5) do
+    Fabricate(:wocket, widget: nil)
+  end
+end
+
+Fabricator(:wocket) do
+  widget
 end
 ```
 
