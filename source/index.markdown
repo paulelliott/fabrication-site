@@ -174,7 +174,7 @@ Fabricator(:adult, from: :person)
 Fabricator(:adult, from: "SomeNamespace::Person")
 ```
 
-The value of `:from` can be either a class-name string or symbol, or the name of another fabricator.
+The value of `:from` can be either a class name string or symbol, or the name of another fabricator.
 
 #### Attributes
 
@@ -545,7 +545,7 @@ end
 #=> an array with 4 company objects
 ```
 
-The `times` methods build equivalent to create an array of non-persistent objects is the
+The `times` method's build equivalent to create an array of non-persistent objects is the
 `build_times`  method.
 
 ```ruby
