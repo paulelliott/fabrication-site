@@ -545,6 +545,15 @@ end
 #=> an array with 4 company objects
 ```
 
+The `times` methods build equivalent to create an array of non-persistent objects is the
+`build_times`  method.
+
+```ruby
+Fabricate.build_times(4, :company, name: 'Hashrocket') do
+  type 'consultancy'
+end
+```
+
 ### Sequences
 
 A sequence allows you to get a series of numbers unique within the current
