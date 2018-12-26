@@ -171,9 +171,10 @@ To use a different name from the class, you must specify `from:
 
 ```ruby
 Fabricator(:adult, from: :person)
+Fabricator(:adult, from: "SomeNamespace::Person")
 ```
 
-The value of `:from` can be either a class name or the name of another fabricator.
+The value of `:from` can be either a class-name string or symbol, or the name of another fabricator.
 
 #### Attributes
 
