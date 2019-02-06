@@ -319,9 +319,9 @@ Fabricator(:widget) do
   wockets(count: 5, fabricator: :wocket_base)
 end
 
-Fabricator(:wocket_base)
+Fabricator(:wocket_base, class_name: :wocket)
 
-Fabricator(:wocket, from: :wocket) do
+Fabricator(:wocket, from: :wocket_base) do
   widget
 end
 ```
